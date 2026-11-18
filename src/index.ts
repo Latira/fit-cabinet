@@ -1,12 +1,7 @@
-import './styles/style.css';
+import './styles/style.scss';
+import { createHeader } from './components/header';
 
-const app = document.getElementById('app');
-
-if (app) {
-
-  const heading = document.createElement('h1');
-
-  heading.textContent = 'FitCabinet в разработке';
-
-  app.append(heading);
-}
+document.addEventListener('DOMContentLoaded', () => {
+  const headerElement = createHeader();
+  document.body.appendChild(headerElement);
+});

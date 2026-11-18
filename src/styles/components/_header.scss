@@ -1,0 +1,85 @@
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+header {
+    @extend %flex-row;
+    height: 120px;
+}
+
+.logo {
+    @extend %flex-row;
+    width: 340px;
+    height: 115px;
+    padding: 18px;
+    border-radius: 45px;
+    background-color: $color-white-bg;
+    box-shadow: 2px 4px 16px 0px rgba(180, 180, 180, 0.8);
+}
+
+.logo__img {
+    width: 85px;
+    height: 85px;
+    border-radius: 45px;
+    background-image: url('../../img/icon-sneakers.jpg');
+    background-size: cover;
+}
+
+.logo__title {
+    @extend %font-logo;
+    text-transform: uppercase;
+    font-size: 32px;
+    letter-spacing: 0.12em;
+}
+
+.menu {
+    @extend %flex-row;
+    gap: 28px;
+    cursor: pointer;
+
+    &__text {
+        @extend %font-p;
+        color: $color-black;
+    }
+
+    &__burger {
+        @extend %flex-column;
+        justify-content: center;
+        gap: 9px;      
+        width: 85px;
+        height: 85px;
+        background-color: $color-white-bg; 
+        border-radius: 50%;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+        &:hover {
+            background-color: rgba($color-white, 0.9);
+        }
+    }
+
+    &__line {
+        display: block;
+        width: 50px;
+        height: 4px;
+        background-color: $color-black;
+        border-radius: 2px;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        transform-origin: center; 
+    }
+    &__burger.is-active {
+        gap: 0; 
+        .menu__line:nth-child(1) {
+            transform: translateY(3px) rotate(45deg);
+        }
+        .menu__line:nth-child(2) {
+            opacity: 0;
+        }
+        .menu__line:nth-child(3) {
+            transform: translateY(-3px) rotate(-45deg);
+        }
+    }
+}
+
+.menu__text {
+    @include font(24px, 1.25, 600);
+    text-transform: uppercase;
+}

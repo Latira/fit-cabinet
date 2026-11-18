@@ -1,0 +1,45 @@
+@use 'variables' as *;
+
+@mixin flex($justify: space-between, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin font($size: $font-p-size, $lh: $font-p-lh, $weight: 400, $font: $font-main) {
+  font-family: $font;
+  font-size: $size;
+  line-height: $lh;
+  font-weight: $weight;
+}
+
+
+    // Placeholders
+%flex-row {
+  @include flex;
+}
+
+%flex-column {
+  @include flex;
+  flex-direction: column; 
+}
+
+%font-logo {
+   @include font($font-h1-size, $font-h1-lh, 400, $font-logo); 
+}
+
+%font-p {
+  @include font;
+}
+
+%font-h1 {
+  @include font($font-h1-size, $font-h1-lh, 700);
+}
+
+%font-h2 {
+  @include font($font-h2-size, $font-h2-lh, 700);
+}
+
+%font-h3 {
+  @include font($font-h3-size, $font-h3-lh, 700);
+}
