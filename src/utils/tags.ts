@@ -8,3 +8,13 @@ export const el = <K extends keyof HTMLElementTagNameMap>(
   if (className) node.className = className;
   return node;
 };
+
+export const createBtn = (
+  className: string,
+  text = '',
+  type: 'button' | 'submit' | 'reset' = 'button'
+): HTMLButtonElement => {
+  const btn = el('button', className, text);
+  btn.type = type;
+  return btn;
+};
