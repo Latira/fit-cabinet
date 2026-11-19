@@ -18,3 +18,14 @@ export const createBtn = (
   btn.type = type;
   return btn;
 };
+
+export const createImg = (
+  className: string,
+  src: string,
+  alt = ' '
+): HTMLImageElement => {
+  const img = el('img', className);
+  img.src = src;
+  img.alt = alt;
+  return img;
+}
