@@ -31,7 +31,7 @@
 .settings__theme-button {
     @include flex(center);
     border: 1px solid var(--color-border__theme);
-    background-color: (-white-bg);
+    background-color: var(--color-theme-btn__bg);
     padding: 8px 16px;
     cursor: pointer;
     transition: border-color 0.3s ease, color 0.3s ease;
@@ -41,7 +41,28 @@
     gap: 10px;
 }
 
+.settings__theme-button:hover {
+    background-color: var(--color-theme-btn__bg-hover);
+    border-color: var(--color-theme-btn__border-hover);
+    box-shadow: 0 0 12px var(--color-theme-btn__shadow-hover);
+}
+
 .theme_icon {
     width: 24px;
     height: 24px;
+    transition: color 0.3s ease;
+}
+
+.theme_icon--sun {
+    color: var(--color-icon-sun);
+}
+
+.theme_icon--moon {
+    color: var(--color-icon-moon);
+}
+
+.settings__edit-button {
+    @include base-btn;
+    width: 150px;
+    
 }

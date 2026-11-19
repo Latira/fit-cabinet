@@ -44,3 +44,11 @@ export const createInput = (
   if (name) input.name = name;
   return input;
 };
+
+export function createSvgIcon(markup: string, className: string): SVGSVGElement {
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = markup.trim();
+    const svg = wrapper.firstElementChild as SVGSVGElement;
+    svg.classList.add(...className.split(' ').filter(Boolean));
+    return svg;
+}

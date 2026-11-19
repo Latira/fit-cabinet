@@ -23,11 +23,27 @@ $font-h1-lh: 1.1;
 :root {
     --color-bg: #F9F2D7;
     --color-text: #48494B;
+    --color-btn__bg: rgb(37, 37, 37);
+    --color-btn__text: rgb(255, 255, 255);
     --color-border__theme: rgba(173, 159, 105, 0.45);
+    --color-icon-sun: #000000;
+    --color-icon-moon: #C9C9C9;
+    --color-theme-btn__bg: rgba(255, 255, 255, 0.5);
+    --color-theme-btn__bg-hover: rgb(252, 255, 217);
+    --color-theme-btn__border-hover: rgba(173, 159, 105, 1);
+    --color-theme-btn__shadow-hover: rgba(0, 0, 0, 0.3);
 }
 
 html.Dark {
     --color-bg: #020c20;
     --color-text: #F9F2D7;
+    --color-btn__bg: rgb(200, 248, 68);
+    --color-btn__text: rgb(39, 34, 34);
     --color-border__theme: rgba(255, 222, 92, 0.7);
+    --color-icon-sun: #C9C9C9;
+    --color-icon-moon: #000000;
+    --color-theme-btn__bg: rgba(255, 255, 255, 0.1);
+    --color-theme-btn__bg-hover: rgba(200, 248, 68, 0.15);
+    --color-theme-btn__border-hover: rgba(255, 222, 92, 1);
+    --color-theme-btn__shadow-hover: rgba(255, 222, 92, 0.3);
 }

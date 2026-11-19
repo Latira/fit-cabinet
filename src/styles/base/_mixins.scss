@@ -13,6 +13,19 @@
   font-weight: $weight;
 }
 
+@mixin base-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  border: none;
+  background-color: var(--color-btn__bg);
+  color: var(--color-btn__text);
+  border-radius: 40px;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+}
 
     // Placeholders
 %flex-row {
