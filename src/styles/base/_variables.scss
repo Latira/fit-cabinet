@@ -23,9 +23,11 @@ $font-h1-lh: 1.1;
 :root {
     --color-bg: #F9F2D7;
     --color-text: #48494B;
+    --color-border__theme: rgba(173, 159, 105, 0.45);
 }
 
 html.Dark {
     --color-bg: #020c20;
     --color-text: #F9F2D7;
+    --color-border__theme: rgba(255, 222, 92, 0.7);
 }
