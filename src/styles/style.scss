@@ -1,0 +1,8 @@
+@use 'base/variables' as *;
+@use 'base/mixins' as *;
+@use 'base/base';
+
+@use 'components/header';
+@use 'components/footer';
+
+@use 'pages/settings';

@@ -1,12 +1,19 @@
-import './styles/style.css';
+import './styles/style.scss';
+import { createHeader } from './components/header';
+import { createFooter } from './components/footer';
+import { renderRoute } from './utils/router';
+import { el } from './utils/tags';
 
-const app = document.getElementById('app');
+document.addEventListener('DOMContentLoaded', () => {
+  const headerElement = createHeader();
+  const footerElement = createFooter();
+  const pageContainer = el('div', 'app-content');
 
-if (app) {
+  document.body.append(headerElement, pageContainer, footerElement);
 
-  const heading = document.createElement('h1');
+  renderRoute(pageContainer);
 
-  heading.textContent = 'FitCabinet в разработке';
-
-  app.append(heading);
-}
+  window.addEventListener('popstate', () => {
+    renderRoute(pageContainer);
+  });
+});

@@ -1,0 +1,47 @@
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+.settings {
+    @extend %flex-column;
+    align-items: stretch;
+
+    &__heading {
+        @include flex(center, center);
+        position: relative;
+        height: 64px;
+    }
+
+    &__title {
+        @extend %font-h1;
+    }
+
+    &__actions {
+        @include flex(flex-end, center);
+        gap: 12px;
+        position: absolute;
+        right: 0;
+    }
+}
+
+.settings__actions {
+    gap: 25px;
+}
+
+
+.settings__theme-button {
+    @include flex(center);
+    border: 1px solid var(--color-border__theme);
+    background-color: (-white-bg);
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: border-color 0.3s ease, color 0.3s ease;
+    border-radius: 40px;
+    width: 100px;
+    height: 46px;
+    gap: 10px;
+}
+
+.theme_icon {
+    width: 24px;
+    height: 24px;
+}

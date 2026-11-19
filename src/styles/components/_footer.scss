@@ -1,0 +1,14 @@
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+footer {
+    width: 100%;
+    border-top: 1px solid $color-line;
+}
+
+.footer__logo {
+    width: 224px;
+    height: 84px;
+    background-image: url('../../img/footer__logo.png');
+    background-size: cover;
+}

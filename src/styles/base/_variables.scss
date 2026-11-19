@@ -1,0 +1,34 @@
+$color-white: #ffffff;
+$color-black: #000000;
+$color-accent: #0055FF;
+$color-white-bg: rgb(255, 255, 255, 0.5);
+$color-line: #AD9F69;
+
+$font-main: 'Inter', sans-serif;
+$font-logo: "Irish Grover", system-ui;
+
+$font-p-size: 20px;
+$font-p-lh: 1.4;
+
+$font-h3-size: 22px;
+$font-h3-lh: 1.1;
+
+$font-h2-size: 28px;
+$font-h2-lh: 1.1;
+
+$font-h1-size: 40px;
+$font-h1-lh: 1.1;
+
+
+    //из базового style.css
+:root {
+    --color-bg: #F9F2D7;
+    --color-text: #48494B;
+    --color-border__theme: rgba(173, 159, 105, 0.45);
+}
+
+html.Dark {
+    --color-bg: #020c20;
+    --color-text: #F9F2D7;
+    --color-border__theme: rgba(255, 222, 92, 0.7);
+}
