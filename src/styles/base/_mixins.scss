@@ -54,5 +54,6 @@
 }
 
 %font-h3 {
-  @include font($font-h3-size, $font-h3-lh, 700);
+  @include font($font-h3-size, $font-h3-lh, 500);
+  text-transform: uppercase;
 }
