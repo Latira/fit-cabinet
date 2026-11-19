@@ -29,3 +29,18 @@ export const createImg = (
   img.alt = alt;
   return img;
 }
+
+type InputType = 'text' | 'number' | 'password' | 'email' | 'file' | 'checkbox' | 'radio' | 'time';
+
+export const createInput = (
+  className: string,
+  type: InputType = 'text',
+  placeholder = '',
+  name = ''
+): HTMLInputElement => {
+  const input = el('input', className);
+  input.type = type;
+  if (placeholder) input.placeholder = placeholder;
+  if (name) input.name = name;
+  return input;
+};
