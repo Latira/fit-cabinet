@@ -2,6 +2,7 @@ import { el } from '../utils/tags';
 
 export function createHeader(): HTMLElement {
     const header = el('header');
+    const headerWrapper = el('div', 'wrapper');
     const logoBack = el('div', 'logo');
     const logoImg = el('div', 'logo__img');
     const logoTitle = el('p', 'logo__title', 'fitcabinet');
@@ -14,7 +15,8 @@ export function createHeader(): HTMLElement {
     menuBurger.append(line1, line2, line3);
     menu.append(menuText, menuBurger);
     logoBack.append(logoImg, logoTitle);
-    header.append(logoBack, menu);
+    headerWrapper.append(logoBack, menu);
+    header.append(headerWrapper);
 
     menu.addEventListener('click', () => {
       menuBurger.classList.toggle('is-active');

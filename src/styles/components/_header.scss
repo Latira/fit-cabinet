@@ -2,6 +2,13 @@
 @use '../base/mixins' as *;
 
 header {
+    width: 100%;
+    border-bottom: 1px solid $color-line;
+}
+
+.header__wrapper {
+    max-width: 1220px;
+    margin: 0 auto;
     @extend %flex-row;
     height: 120px;
 }
