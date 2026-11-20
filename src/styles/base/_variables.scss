@@ -22,6 +22,7 @@ $font-h1-lh: 1.1;
 
     //из базового style.css
 :root {
+    --color-bg__main: linear-gradient(to bottom, #E7FAAF 0%, #C6F5EE 100%);
     --color-bg: #F9F2D7;
     --color-text: #48494B;
     --color-btn__bg: rgb(37, 37, 37);
@@ -33,9 +34,25 @@ $font-h1-lh: 1.1;
     --color-theme-btn__bg-hover: rgb(252, 255, 217);
     --color-theme-btn__border-hover: rgba(173, 159, 105, 1);
     --color-theme-btn__shadow-hover: rgba(0, 0, 0, 0.3);
+    --color-user-avatar__bg: rgba(255, 255, 255, 0.64);
+    --color-user-avatar__border: rgba(255, 255, 255, 0.85);
+    --color-user-avatar__icon: rgba(72, 73, 75, 0.75);
+    --color-user-avatar__icon-hover: rgba(72, 73, 75, 1);
+    --color-user-avatar__bg-hover: rgba(255, 255, 255, 0.9);
+    --color-user-avatar__border-hover: rgba(173, 159, 105, 0.9);
+    --color-label: rgba(87, 82, 66, 1);
+    --color-label-active: #000000;
+    --color-input__bg: rgba(255, 255, 255, 0.5);
+    --color-input__bg-hover: rgba(255, 255, 255, 0.8);
+    --color-input__bg-active: rgba(255, 255, 255, 0.95);
+    --color-input__border: rgba(173, 159, 105, 0.45);
+    --color-input__border-hover: rgba(173, 159, 105, 0.85);
+    --color-input__border-active: #0055FF;
+    --color-input__shadow-active: rgba(0, 85, 255, 0.2);
 }
 
 html.Dark {
+    --color-bg__main: linear-gradient(to bottom, #141A13 0%, #0F181A 100%);
     --color-bg: #020c20;
     --color-text: #F9F2D7;
     --color-btn__bg: rgb(200, 248, 68);
@@ -47,4 +64,19 @@ html.Dark {
     --color-theme-btn__bg-hover: rgba(200, 248, 68, 0.15);
     --color-theme-btn__border-hover: rgba(255, 222, 92, 1);
     --color-theme-btn__shadow-hover: rgba(255, 222, 92, 0.3);
+    --color-user-avatar__bg: rgba(228, 210, 107, 0.45);
+    --color-user-avatar__border: rgba(228, 210, 107, 0.65);
+    --color-user-avatar__icon: rgba(249, 242, 215, 0.8);
+    --color-user-avatar__icon-hover: rgba(249, 242, 215, 1);
+    --color-user-avatar__bg-hover: rgba(228, 210, 107, 0.65);
+    --color-user-avatar__border-hover: rgba(255, 222, 92, 1);
+    --color-label: rgba(230, 215, 169, 1);
+    --color-label-active: rgb(200, 248, 68);
+    --color-input__bg: rgba(253, 248, 203, 0.15);
+    --color-input__bg-hover: rgba(253, 248, 203, 0.25);
+    --color-input__bg-active: rgba(253, 248, 203, 0.3);
+    --color-input__border: rgba(247, 226, 143, 0.45);
+    --color-input__border-hover: rgba(255, 222, 92, 0.8);
+    --color-input__border-active: rgb(200, 248, 68);
+    --color-input__shadow-active: rgba(200, 248, 68, 0.25);
 }

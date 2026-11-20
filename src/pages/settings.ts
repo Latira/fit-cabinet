@@ -1,5 +1,5 @@
-import { el, createBtn, createImg, createSvgIcon } from '../utils/tags';
-import userPlusIcon from '../img/icon--user-plus.svg';
+import { el, createBtn, createImg, createSvgIcon, createInput } from '../utils/tags';
+import userPlusSvg from '../img/icon--user-plus.svg?raw';
 import sunSvg from '../img/icon--sun.svg?raw';
 import moonSvg from '../img/icon--moon.svg?raw';
 import { getInitialTheme, applyTheme, toggleTheme } from '../components/theme';
@@ -27,12 +27,64 @@ export function createSettings(): HTMLElement {
     actions.append(themeBtn, editBtn);
     heading.append(title, actions);
 
-    const profile = el('div', 'settings__profile');
-    const profileBg = el('div', 'settings__user--bg');
-    const profileIcon = createImg('settings__user--icon', userPlusIcon, 'icon profile user');
+    const fileInput = createInput('settings__file-input', 'file');
+    fileInput.accept = 'image/*';
+    fileInput.id = 'avatar-upload';
+    fileInput.hidden = true;
+    fileInput.style.display = 'none';
 
-    profileBg.append(profileIcon);
-    profile.append(profileBg);
-    settings.append(heading, profile);
+    const profileBtn = createBtn('settings__profile-btn');
+    profileBtn.setAttribute('aria-label', 'Upload avatar');
+    profileBtn.addEventListener('click', () => fileInput.click());
+
+    const profileBg = el('div', 'settings__user--bg');
+    const profileIcon = createSvgIcon(userPlusSvg, 'settings__user--icon');
+    const profilePreview = createImg('settings__user--preview', '', 'Avatar preview');
+    profilePreview.hidden = true;
+    profilePreview.style.display = 'none';
+
+    profileBg.append(profileIcon, profilePreview);
+    profileBtn.append(profileBg);
+
+    fileInput.addEventListener('change', () => {
+        const file = fileInput.files?.[0];
+        if (!file) return;
+
+        if (!file.type.startsWith('image/')) {
+            fileInput.value = '';
+            return;
+        }
+        if (file.size > 2 * 1024 * 1024) {
+            fileInput.value = '';
+            return;
+        }
+
+        const url = URL.createObjectURL(file);
+        profilePreview.src = url;
+        profilePreview.hidden = false;
+        profilePreview.style.display = 'block';
+        profileIcon.style.display = 'none';
+    });
+
+    const formData = el('div', 'settings__form');
+
+    const nameField = el('div', 'settings__field');
+    const nameLabel = el('label', 'settings__label', 'Name:');
+    nameLabel.htmlFor = 'settings-name';
+    const nameInput = createInput('settings__input settings__input--name', 'text', 'Enter your name');
+    nameInput.id = 'settings-name';
+    nameField.append(nameLabel, nameInput);
+
+    const emailField = el('div', 'settings__field');
+    const emailLabel = el('label', 'settings__label', 'Email:');
+    emailLabel.htmlFor = 'settings-email';
+    const emailInput = createInput('settings__input settings__input--email', 'email', 'Enter your email');
+    emailInput.id = 'settings-email';
+    emailField.append(emailLabel, emailInput);
+
+    formData.append(nameField, emailField);
+
+
+    settings.append(heading, profileBtn, fileInput, formData);
     return settings;
 }

@@ -52,6 +52,9 @@
     height: 24px;
     transition: color 0.3s ease;
 }
+svg, path, circle, line, rect {
+        fill: currentColor;
+    }
 
 .theme_icon--sun {
     color: var(--color-icon-sun);
@@ -63,6 +66,148 @@
 
 .settings__edit-button {
     @include base-btn;
-    width: 150px;
+    width: 100px;
+    height: 50px;
     
+}
+
+//==== avatar =====//
+.settings__file-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.settings__profile-btn {
+    align-self: center;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    line-height: 0;
+    border-radius: 50%;
+
+    &:hover .settings__user--bg {
+        background: var(--color-user-avatar__bg-hover);
+        border-color: var(--color-user-avatar__border-hover);
+        color: var(--color-user-avatar__icon-hover);
+        box-shadow: 0 0 0 4px var(--color-user-avatar__shadow-hover);
+    }
+
+    &:focus-visible {
+        outline: none;
+
+        .settings__user--bg {
+            outline: 2px solid var(--color-user-avatar__border-hover);
+            outline-offset: 3px;
+        }
+    }
+}
+
+.settings__user--bg {
+    @include flex(center);
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: var(--color-user-avatar__bg);
+    border: 2px solid var(--color-user-avatar__border);
+    color: var(--color-user-avatar__icon);
+    overflow: hidden;
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.settings__user--icon {
+    width: 60%;
+    height: 60%;
+    fill: currentColor;
+    color: inherit;
+    object-fit: cover;
+    object-position: center;
+}
+
+.settings__file-input {
+    display: none;
+}
+
+//===== FORM UNDER AVATAR =====//
+
+.settings__form {
+    @extend %flex-column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 30px 0 50px 0;
+}
+
+.settings__field {
+    @extend %flex-row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+
+    &:hover .settings__label,
+    &:focus-within .settings__label {
+        color: var(--color-label-active);
+    }
+}
+
+.settings__label {
+    @include font(18px, 1.2, 500);
+    color: var(--color-label);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.settings__input {
+    @include font($font-p-size, $font-p-lh, 400);
+    width: 300px;
+    height: 40px;
+    padding: 14px 20px;
+    border-radius: 20px;
+    background-color: var(--color-input__bg);
+    border: 1px solid var(--color-input__border);
+    color: var(--color-text);
+    outline: none;
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+
+    &::placeholder {
+        color: var(--color-label);
+        opacity: 0.7;
+    }
+
+    &:hover {
+        background-color: var(--color-input__bg-hover);
+        border-color: var(--color-input__border-hover);
+    }
+
+    &:focus,
+    &:active {
+        background-color: var(--color-input__bg-active);
+        border-color: var(--color-input__border-active);
+        box-shadow: 0 0 0 4px var(--color-input__shadow-active);
+    }
+
+
+    &:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+
+        &:hover {
+            background-color: var(--color-input__bg);
+            border-color: var(--color-input__border);
+        }
+    }
 }
