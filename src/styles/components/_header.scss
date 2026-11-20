@@ -90,3 +90,37 @@ header {
     @include font(24px, 1.25, 600);
     text-transform: uppercase;
 }
+
+.burger-menu {
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    width: 500px;
+    height: 600px;
+    background: linear-gradient(180deg, #e4f9c3 0%, #a6f1e0 100%);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    z-index: 99;
+    display: none;    
+    &.is-open {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.burger-menu__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.burger-menu__link {
+    @extend %font-h3;
+    color: #000;
+    font-weight: bold;
+}

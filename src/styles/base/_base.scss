@@ -29,6 +29,7 @@ ol {
 a {
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
 }
 
 button {
@@ -57,19 +58,27 @@ svg {
   width: 100%;
   max-width: 1220px;
   margin: 0 auto;
-  padding: 0 100px;
+  padding: 50px 100px 50px;
 }
 
 .wrapper {
-    max-width: 1220px;
-    margin: 0 auto;
-    @extend %flex-row;
-    height: 120px;
-    padding: 0 100px;
+  max-width: 1220px;
+  margin: 0 auto;
+  @extend %flex-row;
+  height: 120px;
+  padding: 0 100px;
+}
+
+h1 {
+  @extend %font-h1;
+}
+
+h2 {
+  @extend %font-h2;
 }
 
 h3 {
-    @extend %font-h3;
+  @extend %font-h3;
 }
 
 // #app {
