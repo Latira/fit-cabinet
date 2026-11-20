@@ -3,6 +3,7 @@ import userPlusSvg from '../img/icon--user-plus.svg?raw';
 import sunSvg from '../img/icon--sun.svg?raw';
 import moonSvg from '../img/icon--moon.svg?raw';
 import { getInitialTheme, applyTheme, toggleTheme } from '../components/theme';
+import { createTabs } from '../components/tabs';
 
 export function createSettings(): HTMLElement {
     const settings = el('main', 'settings');
@@ -84,7 +85,16 @@ export function createSettings(): HTMLElement {
 
     formData.append(nameField, emailField);
 
+    const faqContent = el('div', 'settings-faq', 'Здесь будут 4 вопроса FAQ');
+    const goalsContent = el('div', 'settings-goals', 'Здесь будут цели: Вода и Сон');
+    const securityContent = el('div', 'settings-security', 'Здесь будет Security');
 
-    settings.append(heading, profileBtn, fileInput, formData);
+    const tabsBlock = createTabs('settings-tabs', [
+        { id: 'faq', label: '01 FAQ', content: faqContent },
+        { id: 'goals', label: '02 Goals', content: goalsContent },
+        { id: 'security', label: '03 Security', content: securityContent },
+    ]);
+
+    settings.append(heading, profileBtn, fileInput, formData, tabsBlock);
     return settings;
 }
