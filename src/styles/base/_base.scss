@@ -17,7 +17,7 @@ body {
   @include font(16px, 1.5);
   min-height: 100vh;
   margin: 0 auto;
-  background: linear-gradient(to bottom, #E7FAAF 0%, #C6F5EE 100%);
+  background: var(--color-bg__main);
   color: var(--color-text);
 }
 
