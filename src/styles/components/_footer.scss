@@ -12,3 +12,27 @@ footer {
     background-image: url('../../img/footer__logo.png');
     background-size: cover;
 }
+
+.footer__content {
+    @extend %flex-row;
+    gap: 20px;
+}
+
+.footer__social-icon {
+    width: 64px;
+    height: 64px;
+    background-image: url('../../img/footer__social-icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.footer__links {
+    @extend %flex-column;
+    align-items: start;
+}
+
+.footer__link {
+    @extend %font-p;
+    color: $color-black;
+    letter-spacing: 0.06em;
+}

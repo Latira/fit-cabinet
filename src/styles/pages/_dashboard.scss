@@ -1,0 +1,27 @@
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+.dashboard__title {
+    white-space: pre-line;
+}
+
+.dashboard__grid {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5% 3%;
+    height: 100%;
+    padding: 50px 0;
+    @media (max-width: 1050px) {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 2%;
+    }
+}
+
+.dashboard__grid > div {
+    width: 400px;
+    height: 450px;
+    background-color: $color-white-bg;
+    padding: 50px;
+    border-radius: 20px;
+}
