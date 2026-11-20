@@ -110,6 +110,12 @@ svg, path, circle, line, rect {
     }
 }
 
+.settings__profile-btn:disabled {
+    cursor: default;
+    pointer-events: none;
+}
+
+
 .settings__user--bg {
     @include flex(center);
     width: 150px;
@@ -264,5 +270,202 @@ svg, path, circle, line, rect {
     &__panel {
         width: 100%;
         padding: 32px;
+    }
+}
+
+//==== FAQ SLIDER ====//
+
+.settings-faq {
+    @extend %flex-column;
+    align-items: stretch;
+    gap: 24px;
+    width: 100%;
+
+    &__header {
+        @include flex(space-between, center);
+    }
+
+    &__title {
+        @include font(22px, 1.2, 700);
+        text-transform: uppercase;
+        color: var(--color-text);
+    }
+
+    &__counter {
+        @include font(16px, 1.2, 600);
+        color: var(--color-label);
+    }
+
+    &__track {
+        width: 100%;
+        min-height: 155px;
+    }
+
+    &__slide {
+        @extend %flex-column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 24px;
+        border-radius: 20px;
+        background-color: var(--color-input__bg);
+        border: 1px solid var(--color-border__theme);
+        animation: fadeInSlide 0.25s ease;
+    }
+
+    &__question {
+        @include font(18px, 1.2, 700);
+        text-transform: uppercase;
+        color: var(--color-text);
+    }
+
+    &__desc {
+        @include font(15px, 1.4, 400);
+        color: var(--color-label);
+        margin-bottom: 6px;
+    }
+
+    &__control {
+        @include flex(flex-start, center);
+        gap: 8px;
+    }
+
+    &__input,
+    &__select {
+        @include font(15px, 1.2, 500);
+        width: 240px;
+        height: 40px;
+        padding: 0 34px 0 18px;
+        border-radius: 20px;
+        background-color: var(--color-faq-input__bg);
+        border: 1px solid var(--color-border__theme);
+        color: var(--color-faq-input__text);
+        outline: none;
+        transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+
+        &::placeholder {
+            color: var(--color-label);
+            opacity: 0.75;
+        }
+
+        &:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+
+    &__badge {
+        @include flex(center, center);
+        @include font(12px, 1, 600);
+        position: relative;
+        z-index: 2;
+        width: 52px;
+        height: 28px;
+        flex-shrink: 0;
+        border-radius: 20px;
+        background-color: var(--color-faq-badge__bg);
+        color: var(--color-faq-badge__text);
+        margin-left: -26px;
+        margin-right: 8px;
+        pointer-events: none;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    &__unit-select {
+        @include font(14px, 1.2, 500);
+        height: 40px;
+        padding: 0 14px;
+        border-radius: 20px;
+        background-color: var(--color-faq-input__bg);
+        border: 1px solid var(--color-border__theme);
+        color: var(--color-faq-input__text);
+        cursor: pointer;
+        transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+
+        &:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+    }
+
+    &__footer {
+        @include flex(space-between, center);
+        padding-top: 8px;
+    }
+
+    &__bars {
+        @include flex(flex-start, center);
+        gap: 8px;
+    }
+
+    &__bar {
+        width: 36px;
+        height: 4px;
+        border-radius: 4px;
+        background-color: var(--color-border__theme);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover:not(&--active) {
+            background-color: var(--color-input__border-hover);
+        }
+
+        &--active {
+            background-color: var(--color-faq-badge__bg);
+        }
+    }
+
+    &__nav {
+        @include flex(flex-end, center);
+        gap: 12px;
+    }
+
+    &__btn {
+        @include font(16px, 1.2, 600);
+        padding: 10px 24px;
+        border-radius: 25px;
+        border: 1px solid var(--color-border__theme);
+        color: var(--color-text);
+        background-color: transparent;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+
+        &:hover {
+            background-color: var(--color-theme-btn__bg-hover);
+        }
+
+        &--next {
+            background-color: var(--color-btn__bg);
+            color: var(--color-btn__text);
+            border-color: var(--color-btn__bg);
+
+            &:hover {
+                opacity: 0.9;
+                background-color: var(--color-btn__bg);
+            }
+        }
+    }
+}
+
+.settings__save-button {
+    @include base-btn;
+    align-self: center;
+    width: 200px;
+    margin: 32px 0 40px;
+}
+
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
     }
 }

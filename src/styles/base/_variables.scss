@@ -51,6 +51,10 @@ $font-h1-lh: 1.1;
     --color-input__border-hover: rgba(173, 159, 105, 0.85);
     --color-input__border-active: #0055FF;
     --color-input__shadow-active: rgba(0, 85, 255, 0.2);
+    --color-faq-input__bg: #D2E3F8;
+    --color-faq-input__text: #000000;
+    --color-faq-badge__bg: #0055FF;
+    --color-faq-badge__text: #ffffff;
 }
 
 html.Dark {
@@ -83,4 +87,8 @@ html.Dark {
     --color-input__border-hover: rgba(255, 222, 92, 0.8);
     --color-input__border-active: rgb(200, 248, 68);
     --color-input__shadow-active: rgba(200, 248, 68, 0.25);
+    --color-faq-input__bg: rgba(253, 248, 203, 0.18);
+    --color-faq-input__text: #F9F2D7;
+    --color-faq-badge__bg: rgb(200, 248, 68);
+    --color-faq-badge__text: rgb(39, 34, 34);
 }
