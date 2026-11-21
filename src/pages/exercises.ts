@@ -76,6 +76,13 @@ export function createExercisesPage(): HTMLElement {
         previewCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
     };
 
+    const selectedExStr = localStorage.getItem('selected_exercise');
+    if (selectedExStr) {
+        const selectedEx: Exercise = JSON.parse(selectedExStr);
+        localStorage.removeItem('selected_exercise'); // сразу очищаем, чтобы при обычном открытии библиотеки карточка была скрыта
+        openExercisePreview(selectedEx);
+    }
+
     const library = el('section', 'exercises-library');
 
     const libHeader = el('div', 'exercises-library__header');

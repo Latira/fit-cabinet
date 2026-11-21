@@ -1,0 +1,125 @@
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+.exercise-picker {
+    // --- Блок создания своего упражнения ---
+    &__create-section {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px dashed var(--color-border, #ddd); // Пунктирная линия для отделения
+    }
+
+    &__create-input {
+        flex: 1;
+        padding: 10px 14px;
+        border: 1px solid var(--color-border, #ddd);
+        border-radius: 8px;
+        font-size: 15px;
+        box-sizing: border-box;
+
+        &:focus {
+            outline: none;
+            border-color: var(--color-primary, #007bff);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+    }
+
+    &__create-btn {
+        background: var(--color-primary, #007bff);
+        color: white;
+        border: none;
+        padding: 0 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 14px;
+        white-space: nowrap;
+        transition: opacity 0.2s;
+
+        &:hover {
+            opacity: 0.9;
+        }
+    }
+
+    // --- Блок поиска ---
+    &__search {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid var(--color-border, #ddd);
+        border-radius: 8px;
+        font-size: 16px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+        
+        &:focus {
+            outline: none;
+            border-color: var(--color-primary, #007bff);
+        }
+    }
+
+    // --- Список упражнений ---
+    &__list {
+        flex: 1;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 8px;
+        border-bottom: 1px solid #f0f0f0;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: background 0.2s;
+
+        &:hover { background: #f9f9f9; }
+    }
+
+    &__checkbox {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+    }
+
+    &__name {
+        flex: 1;
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--color-text, #333);
+    }
+
+    &__muscle {
+        font-size: 12px;
+        color: #666;
+        background: #f4f4f4;
+        padding: 4px 8px;
+        border-radius: 4px;
+        white-space: nowrap;
+    }
+
+    // --- Статусы и кнопки ---
+    &__status {
+        text-align: center;
+        color: #777;
+        padding: 20px;
+    }
+
+    &__done-btn {
+        background: var(--color-primary, #007bff);
+        color: white;
+        border: none;
+        padding: 10px 30px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: opacity 0.2s;
+        
+        &:hover { opacity: 0.9; }
+    }
+}

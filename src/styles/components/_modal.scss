@@ -1,0 +1,85 @@
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+html:has(.modal-overlay),
+body:has(.modal-overlay) {
+    overflow: hidden;
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.6);
+    @include flex(center, center);
+    z-index: 1000;
+    backdrop-filter: blur(6px);
+}
+
+.modal-window {
+    background: var(--color-bg);
+    color: var(--color-text);
+    border: 1px solid var(--color-border__theme);
+    width: 100%;
+    max-width: 560px;
+    max-height: calc(100vh - 48px) !important;
+    height: auto !important;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+
+    &__header {
+        @include flex(space-between, center);
+        flex-shrink: 0;
+        padding: 20px 24px 14px;
+        border-bottom: 1px solid var(--color-border__theme);
+    }
+
+    &__title {
+        @include font(22px, 1.2, 700);
+        margin: 0;
+        color: var(--color-text);
+    }
+
+    &__close {
+        @include flex(center, center);
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        font-size: 24px;
+        line-height: 1;
+        cursor: pointer;
+        color: var(--color-label);
+        background-color: var(--color-input__bg);
+        border: 1px solid var(--color-border__theme);
+        transition: all 0.2s ease;
+
+        &:hover {
+            color: var(--color-text);
+            background-color: var(--color-input__bg-hover);
+            border-color: var(--color-input__border-hover);
+        }
+    }
+
+    &__body {
+        padding: 16px 24px 20px;
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__footer {
+        @include flex(flex-end, center);
+        flex-shrink: 0;
+        gap: 12px;
+        padding: 14px 24px 20px;
+        border-top: 1px solid var(--color-border__theme);
+    }
+}

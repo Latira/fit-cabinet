@@ -1,45 +1,27 @@
-import { el, createBtn, createImg, createInput } from '../utils/tags';
-import emptyWorkout from '../img/workout-empty.png';
+import { el } from '../utils/tags';
+import { type SavedWorkout } from './createWorkout';
+import { createRoutineBlock } from './workout/routineBlock';
+import { createWorkoutTodayBlock } from './workout/workoutTodayBlock';
 
 export function createWorkouts(): HTMLElement {
     const workouts = el('main', 'workouts');
     const title = el('h1', 'workouts__title', 'Workouts');
-
     const content = el('div', 'workouts__content');
 
-    const routine = el('div', 'routine');
-    const routineTitle = el('h2', 'routine__title', 'Your routine activity');
+    const getContainer = (): HTMLElement =>
+        (document.querySelector('.app-content') as HTMLElement) || document.body;
 
-    const hasRoutine = false;
+    const refreshPage = () => {
+        getContainer().replaceChildren(createWorkouts());
+    };
 
-    if (hasRoutine) {
-        const routineBtn = createBtn('routine__button', 'create workout');
-        routine.append(routineTitle, routineBtn);
-    } else {
-        const emptyText = el('p', 'routine__empty-text', "You don't have any workouts yet. Time to get started!");
-        const emptyImg = createImg('routine__empty-img', emptyWorkout, 'image for empty workout');
-        const routineBtn = createBtn('routine__button', 'create workout');
-        routine.append(routineTitle, emptyImg, emptyText, routineBtn);
-    }
+    const savedWorkoutsStr = localStorage.getItem('workouts');
+    const savedWorkouts: SavedWorkout[] = savedWorkoutsStr ? JSON.parse(savedWorkoutsStr) : [];
 
-    const workoutToday = el('div', 'workout-today');
-    const workoutTodayTitle = el('h2', 'workout-today__title', 'Workout today');
+    const routineBlock = createRoutineBlock(savedWorkouts, refreshPage);
+    const todayBlock = createWorkoutTodayBlock(savedWorkouts, refreshPage);
 
-    const hasTodayWorkout = false;
-
-    if (hasTodayWorkout) {
-        const workoutTodayBtn = createBtn('workout-today__button', 'start workout');
-        workoutToday.append(workoutTodayTitle, workoutTodayBtn);
-    } else {
-
-        const emptyTodayText = el('p', 'workout-today__empty-text', "You don't have a workout for today yet. Create one to get started and crush your goals!");
-        const emptyTodayImg = createImg('workout-today__empty-img', emptyWorkout, 'image for empty workout');
-        const workoutTodayBtn = createBtn('workout-today__button', 'start workout');
-        
-        workoutToday.append(workoutTodayTitle, emptyTodayImg, emptyTodayText, workoutTodayBtn);
-    }
-
-    content.append(routine, workoutToday);
+    content.append(routineBlock, todayBlock);
     workouts.append(title, content);
     return workouts;
 }
