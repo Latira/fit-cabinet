@@ -1,9 +1,11 @@
 import { createSettings } from '../pages/settings';
 import { createDashboard } from '../pages/dashboard'
+import { createExercisesPage } from '../pages/exercises';
 
 const routes: Record<string, () => HTMLElement> = {
   '/': createDashboard,
   '/settings': createSettings,
+  '/exercises': createExercisesPage,
   // '/about': createAbout,
   // '/food-diary': createFoodDiary,
   // '/workouts': createWorkouts,

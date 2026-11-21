@@ -1,0 +1,353 @@
+.exercises {
+    width: 100%;
+    padding: 40px 20px;
+
+    &__heading {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 32px;
+    }
+
+    &__title {
+        margin: 0;
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        text-align: center;
+        color: var(--color-exercises-heading);
+    }
+}
+
+.exercises-library {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 28px 32px;
+    background-color: var(--color-exercises-surface);
+    border-radius: 20px;
+    box-shadow: 0 4px 24px var(--color-exercises-surface-shadow);
+
+    &__header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    &__title-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 6px;
+    }
+
+    &__title {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--color-exercises-title);
+    }
+
+    &__count {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2px 10px;
+        border-radius: 999px;
+        background-color: var(--color-exercises-badge-bg);
+        color: var(--color-exercises-badge-text);
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    &__subtitle {
+        margin: 0;
+        font-size: 13px;
+        color: var(--color-exercises-subtitle);
+    }
+
+    &__note {
+        margin: 14px 0 0;
+        font-size: 12px;
+        color: var(--color-exercises-note);
+    }
+}
+
+.exercises-table {
+    &__head,
+    &__row {
+        display: grid;
+        grid-template-columns: minmax(260px, 2.2fr) 110px minmax(140px, 1.1fr) 230px;
+        align-items: center;
+        gap: 16px;
+        padding: 0 16px;
+    }
+
+    &__head {
+        height: 40px;
+        background-color: var(--color-exercises-thead-bg);
+        border-radius: 10px;
+        margin-bottom: 4px;
+    }
+
+    &__head-cell {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--color-exercises-thead-text);
+    }
+
+    &__body {
+        max-height: 560px;
+        padding-right: 6px;
+    }
+
+    &__row {
+        padding-top: 14px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--color-exercises-row-border);
+        transition: background-color 0.15s ease;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &:hover {
+            background-color: var(--color-exercises-row-hover);
+        }
+    }
+
+    &__col-info {
+        min-width: 0;
+    }
+
+    &__name {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--color-exercises-name);
+        margin-bottom: 4px;
+    }
+
+    &__desc {
+        font-size: 12px;
+        color: var(--color-exercises-desc);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__col-reps {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__reps-val {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--color-exercises-reps-val);
+    }
+
+    &__reps-sub {
+        font-size: 11px;
+        color: var(--color-exercises-reps-sub);
+    }
+
+    &__col-muscles {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    &__muscle-badge {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 6px;
+        background-color: var(--color-exercises-badge-bg);
+        color: var(--color-exercises-badge-text);
+        font-size: 11px;
+        font-weight: 500;
+        text-transform: capitalize;
+    }
+
+    &__col-actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+    }
+
+    &__btn-view {
+        height: 32px;
+        padding: 0 14px;
+        border: 1px solid var(--color-exercises-btn-view-border);
+        border-radius: 8px;
+        background-color: var(--color-exercises-btn-view-bg);
+        color: var(--color-exercises-btn-view-text);
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.15s ease;
+
+        &:hover {
+            border-color: var(--color-exercises-btn-view-border-hover);
+            background-color: var(--color-exercises-btn-view-bg-hover);
+        }
+    }
+
+    &__btn-add {
+        height: 32px;
+        padding: 0 14px;
+        border: none;
+        border-radius: 8px;
+        background-color: var(--color-exercises-accent);
+        color: var(--color-exercises-accent-text);
+        font-size: 12px;
+        font-weight: 500;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: opacity 0.15s ease;
+
+        &:hover {
+            opacity: 0.9;
+        }
+    }
+
+    &__status {
+        padding: 32px 16px;
+        text-align: center;
+        font-size: 14px;
+        color: var(--color-exercises-subtitle);
+    }
+}
+
+.exercises-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    max-width: 1120px;
+    margin: 0 auto 28px;
+
+    &__btn {
+        padding: 8px 20px;
+        border: 1px solid var(--color-exercises-filter-border);
+        border-radius: 999px;
+        background-color: var(--color-exercises-filter-bg);
+        color: var(--color-exercises-filter-text);
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.15s ease;
+
+        &:hover {
+            border-color: var(--color-exercises-accent);
+            color: var(--color-exercises-accent);
+        }
+
+        &.is-active {
+            background-color: var(--color-exercises-accent);
+            border-color: var(--color-exercises-accent);
+            color: var(--color-exercises-accent-text);
+        }
+    }
+}
+
+.exercise-preview {
+    position: relative;
+    max-width: 680px;
+    height: 360px;
+    margin: 0 auto 32px;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: var(--color-exercise-preview-bg);
+    box-shadow: 0 12px 32px var(--color-exercise-preview-shadow);
+
+    &[hidden] {
+        display: none;
+    }
+
+    &__bg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    &__bookmark {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--color-exercise-preview-bookmark-border);
+        border-radius: 50%;
+        background: var(--color-exercise-preview-bookmark-bg);
+        backdrop-filter: blur(6px);
+        color: #ffffff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: transform 0.15s ease, background-color 0.15s ease;
+
+        &:hover {
+            transform: scale(1.06);
+            background: var(--color-exercise-preview-bookmark-bg-hover);
+        }
+
+        &.is-saved {
+            background-color: var(--color-exercises-accent);
+            border-color: var(--color-exercises-accent);
+        }
+    }
+
+    &__overlay {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 36px 28px 24px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.45) 60%, transparent 100%);
+        color: var(--color-exercise-preview-title);
+    }
+
+    &__title {
+        margin: 0 0 8px;
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 1.2;
+        color: var(--color-exercise-preview-title);
+    }
+
+    &__muscles {
+        margin: 0;
+        font-size: 13px;
+        color: var(--color-exercise-preview-muscles);
+        text-transform: capitalize;
+    }
+
+    &__meta {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 6px;
+        flex-shrink: 0;
+    }
+
+    &__stat {
+        font-size: 15px;
+        font-weight: 600;
+        white-space: nowrap;
+        color: var(--color-exercise-preview-stat);
+    }
+}

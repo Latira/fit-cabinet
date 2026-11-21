@@ -4,6 +4,9 @@
 
 @use 'components/header';
 @use 'components/footer';
+@use 'components/pagination';
+@use 'components/scrollbar';
 
 @use 'pages/settings';
 @use 'pages/dashboard';
+@use 'pages/exercises';
