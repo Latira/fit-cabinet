@@ -1,6 +1,7 @@
 import { createSettings } from '../pages/settings';
 import { createDashboard } from '../pages/dashboard'
 import { createExercisesPage } from '../pages/exercises';
+import { createWorkouts } from '../pages/workouts';
 
 const routes: Record<string, () => HTMLElement> = {
   '/': createDashboard,
@@ -8,7 +9,7 @@ const routes: Record<string, () => HTMLElement> = {
   '/exercises': createExercisesPage,
   // '/about': createAbout,
   // '/food-diary': createFoodDiary,
-  // '/workouts': createWorkouts,
+  '/workouts': createWorkouts,
   // '/notes': createNotes,
   // '/wishlist': createWishlist,
 };
