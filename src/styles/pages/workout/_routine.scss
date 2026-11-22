@@ -1,0 +1,65 @@
+@use '../../base/variables' as *;
+@use '../../base/mixins' as *;
+
+.routine__list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin: 16px 0 10px;
+}
+
+.routine__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-input__bg);
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid var(--color-border__theme);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+}
+
+.routine__item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+}
+
+.routine__item-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.routine__item-meta {
+    font-size: 14px;
+    color: var(--color-label);
+}
+
+.routine__item-view {
+    background-color: transparent;
+    color: var(--color-input__border-active);
+    border: 1px solid var(--color-input__border-active);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+
+    &:hover {
+        background-color: var(--color-btn__bg);
+        color: var(--color-btn__text);
+        border-color: var(--color-btn__bg);
+    }
+}

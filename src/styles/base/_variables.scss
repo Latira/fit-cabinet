@@ -35,6 +35,7 @@ $font-h1-lh: 1.1;
     --color-bg: #F9F2D7;
     --color-text: #48494B;
     --color-border: rgba(37, 37, 37, 1);
+    --color-surface: rgba(255, 255, 255, 0.5);
     --color-surface__secondary: rgba(255, 255, 255, 0.72);
     --color-btn__bg: rgb(37, 37, 37);
     --color-btn__text: rgb(255, 255, 255);
@@ -127,6 +128,7 @@ html.Dark {
     --color-bg: #020c20;
     --color-text: #F9F2D7;
     --color-border: rgba(255, 255, 255, 0.18);
+    --color-surface: rgba(255, 255, 255, 0.3);
     --color-surface__secondary: rgba(253, 248, 203, 0.15);
     --color-btn__bg: rgb(200, 248, 68);
     --color-btn__text: rgb(39, 34, 34);

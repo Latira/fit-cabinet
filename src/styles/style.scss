@@ -6,7 +6,11 @@
 @use 'components/footer';
 @use 'components/pagination';
 @use 'components/scrollbar';
+@use 'components/modal';
+@use 'components/exercisePicker';
 
 @use 'pages/settings';
 @use 'pages/dashboard';
 @use 'pages/exercises';
+@use 'pages/workouts';
+@use 'pages/createWorkout';

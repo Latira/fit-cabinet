@@ -46,9 +46,22 @@ export const createInput = (
 };
 
 export function createSvgIcon(markup: string, className: string): SVGSVGElement {
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = markup.trim();
-    const svg = wrapper.firstElementChild as SVGSVGElement;
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(markup.trim(), 'image/svg+xml');
+    const svg = document.importNode(doc.documentElement, true) as unknown as SVGSVGElement;
+
     svg.classList.add(...className.split(' ').filter(Boolean));
     return svg;
+}
+
+export function isToday(isoDate: string): boolean {
+    const d = new Date(isoDate);
+    if (Number.isNaN(d.getTime())) return false;
+
+    const now = new Date();
+    return (
+        d.getFullYear() === now.getFullYear() &&
+        d.getMonth() === now.getMonth() &&
+        d.getDate() === now.getDate()
+    );
 }

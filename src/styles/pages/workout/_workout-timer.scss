@@ -1,0 +1,89 @@
+@use '../../base/variables' as *;
+@use '../../base/mixins' as *;
+
+.workout-timer {
+    @extend %flex-column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+
+    &__status {
+        @include font(15px, 1.3, 500);
+        color: var(--color-label);
+    }
+
+    &__display {
+        @include font(56px, 1, 700);
+        font-variant-numeric: tabular-nums;
+        color: var(--color-text);
+        padding: 16px 32px;
+        border-radius: 20px;
+        background-color: var(--color-input__bg);
+        border: 1px solid var(--color-border__theme);
+    }
+
+    &__controls {
+        @include flex(center, center);
+        gap: 12px;
+        width: 100%;
+    }
+
+    &__btn {
+        @include font(15px, 1.2, 600);
+        padding: 10px 22px;
+        border-radius: 20px;
+        border: 1px solid var(--color-border__theme);
+        color: var(--color-text);
+        background-color: transparent;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover:not(:disabled) {
+            background-color: var(--color-theme-btn__bg-hover);
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        &--primary {
+            background-color: var(--color-btn__bg);
+            color: var(--color-btn__text);
+            border-color: var(--color-btn__bg);
+
+            &:hover:not(:disabled) {
+                opacity: 0.9;
+                background-color: var(--color-btn__bg);
+            }
+        }
+
+        &--finish {
+            border-color: var(--color-input__border-active);
+            color: var(--color-input__border-active);
+
+            &:hover:not(:disabled) {
+                background-color: var(--color-btn__bg);
+                color: var(--color-btn__text);
+                border-color: var(--color-btn__bg);
+            }
+        }
+    }
+
+    &__list {
+        @extend %flex-column;
+        align-items: stretch;
+        gap: 8px;
+        width: 100%;
+        padding-top: 12px;
+        border-top: 1px solid var(--color-border__theme);
+    }
+
+    &__item {
+        @include font(14px, 1.3, 400);
+        color: var(--color-label);
+        padding: 8px 12px;
+        border-radius: 8px;
+        background-color: var(--color-input__bg);
+    }
+}
