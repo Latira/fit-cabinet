@@ -1,12 +1,9 @@
 import { createSettings } from '../pages/settings';
 import { createDashboard } from '../pages/dashboard'
 import { createExercisesPage } from '../pages/exercises';
-<<<<<<< HEAD
 import { createAbout } from '../pages/about-us';
-=======
 import { createWorkouts } from '../pages/workouts';
 import { createWorkoutPage } from '../pages/createWorkout';
->>>>>>> a0d6e669659a8f9c457c7970fd17753f0187fdac
 
 const routes: Record<string, () => HTMLElement> = {
   '/': createDashboard,
