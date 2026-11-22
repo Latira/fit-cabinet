@@ -2,8 +2,15 @@
 @use '../base/mixins' as *;
 
 header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
     width: 100%;
-    border-bottom: 1px solid $color-line;
+    border-bottom: 1px solid var(--color-border__theme);
+    background-color: var(--color-bg__main);
+    background-attachment: fixed; 
+    backdrop-filter: blur(30px); 
+    -webkit-backdrop-filter: blur(30px); 
 }
 
 .header__wrapper {
@@ -19,8 +26,12 @@ header {
     height: 115px;
     padding: 18px;
     border-radius: 45px;
-    background-color: $color-white-bg;
+    background-color: var--(color-white-bg);
     box-shadow: 2px 4px 16px 0px rgba(180, 180, 180, 0.8);
+    transition: opacity 0.2s ease-in-out;
+    &:hover {
+        opacity: 0.75;
+    }
 }
 
 .logo__img {
@@ -40,48 +51,79 @@ header {
 
 .menu {
     @extend %flex-row;
+    flex-wrap: wrap;
     gap: 28px;
+    position: relative;
+    width: 500px;
+    height: 60px;
+    padding: 0px 24px;
+    margin-left: auto;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    background: transparent;
+    overflow: hidden;
+    align-self: flex-start;
+    margin-top: 30px;
+    transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
     cursor: pointer;
+
+    &.is-open {
+        height: 650px;
+        background: var(--color-bg__main);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        border-radius: 24px;
+        justify-content: space-between;
+        align-content: flex-start;
+        padding: 20px 70px 0px;
+        margin-top: 10px;
+    }
+
+    &:hover {
+        .menu__burger {
+            background-color: var(--color-white-bg);
+        }
+        .menu__text {
+            text-shadow: 0 0 8px rgba(0, 85, 255, 0.4);
+        }
+    }
 
     &__text {
         @extend %font-p;
-        color: $color-black;
+        color: var(--color-black);
+        transition: text-shadow 0.3s ease, color 0.3s ease;
     }
 
     &__burger {
         @extend %flex-column;
         justify-content: center;
-        gap: 9px;      
-        width: 85px;
-        height: 85px;
-        background-color: $color-white-bg; 
+        gap: 7px;
+        width: 60px;
+        height: 60px; 
+        background-color: transparent;
         border-radius: 50%;
-        transition: background-color 0.3s ease;
-        cursor: pointer;
-        &:hover {
-            background-color: rgba($color-white, 0.9);
-        }
+        transition: background-color 0.5s ease;
     }
 
     &__line {
         display: block;
-        width: 50px;
+        width: 40px;
         height: 4px;
-        background-color: $color-black;
+        background-color: var(--color-black);
         border-radius: 2px;
-        transition: transform 0.3s ease, opacity 0.3s ease;
+        transition: transform 0.5s ease, opacity 0.3s ease;
         transform-origin: center; 
     }
+    
     &__burger.is-active {
         gap: 0; 
         .menu__line:nth-child(1) {
-            transform: translateY(3px) rotate(45deg);
+            transform: translateY(4px) rotate(45deg);
         }
         .menu__line:nth-child(2) {
             opacity: 0;
         }
         .menu__line:nth-child(3) {
-            transform: translateY(-3px) rotate(-45deg);
+            transform: translateY(-4px) rotate(-45deg);
         }
     }
 }
@@ -92,35 +134,276 @@ header {
 }
 
 .burger-menu {
-    position: absolute;
-    top: 70px;
-    right: 20px;
-    width: 500px;
-    height: 600px;
-    background: linear-gradient(180deg, #e4f9c3 0%, #a6f1e0 100%);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    z-index: 99;
-    display: none;    
-    &.is-open {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-}
+  width: 100%;
+  margin-top: 40px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
 
-.burger-menu__list {
+  &.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
+  }
+
+  &__list {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    width: 100%;
+  }
+
+  &__item {
+    width: 100%;
+    text-align: center;
+    border-radius: 10px;
+    overflow: hidden;
+
+    &.is-active {
+      background-color: var(--color-text);
+      .burger-menu__link {
+        color: var(--color-btn__text);
+      }
+    }
+  }
+
+  &__link {
+    display: block;
+    padding: 14px 0;
+    @extend %font-h2;
+    color: var(--color-black);
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+
+  &__item {
+    transition: background-color 0.5s ease;
+    &:hover {
+      background-color: var(--color-dark-bg);
+      .burger-menu__link {
+        color: var(--color-burger-text);
+      }
+    }
+  }
 }
 
-.burger-menu__link {
-    @extend %font-h3;
-    color: #000;
-    font-weight: bold;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// .menu {
+//     // @extend %flex-row;
+//     display: grid;
+//     flex-wrap: wrap;
+//     gap: 28px;
+//     position: relative;
+//     width: 500px;
+//     height: 60px;
+//     padding: 17px 24px;
+//     margin-left: auto;
+//     box-sizing: border-box;
+//     background: transparent;
+//     overflow: hidden;
+//     transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
+//     cursor: pointer;
+
+//     &.is-open {
+//         height: 650px;
+//         background: var(--color-bg__main);
+//         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+//         align-content: flex-start;
+//         gap: 0;
+//     }
+
+//     &:hover {
+//         .menu__burger {
+//             background-color: var(--color-white-bg);
+//         }
+//         .menu__text {
+//             text-shadow: 0 0 8px rgba(0, 85, 255, 0.4);
+//         }
+//     }
+
+//     &__text {
+//         @extend %font-p;
+//         color: var(--color-black);
+//         transition: text-shadow 0.3s ease, color 0.3s ease;
+//         margin-left: 0;
+//         .menu.is-open & {
+//             margin-left: 0;
+//         }
+//     }
+
+//     &__burger {
+//         @extend %flex-column;
+//         justify-content: center;
+//         align-items: center;
+//         gap: 9px;
+//         width: 50px;
+//         height: 24px; 
+//         background-color: var--(color-white-bg);
+//         border-radius: 50%;
+//         transition: background-color 0.5s ease;
+//         margin-left: auto; 
+
+//         /* Когда меню открыто, этот отступ гарантирует, что крестик встанет строго справа */
+//         .menu.is-open & {
+//             margin-left: auto; 
+//         }
+//     }
+
+//     &__line {
+//         display: block;
+//         width: 50px;
+//         height: 4px;
+//         background-color: var(--color-black);
+//         border-radius: 2px;
+//         transition: transform 0.5s ease, opacity 0.3s ease;
+//         transform-origin: center; 
+//     }
+//     &__burger.is-active {
+//         gap: 0; 
+//         .menu__line:nth-child(1) {
+//             transform: translateY(3px) rotate(45deg);
+//         }
+//         .menu__line:nth-child(2) {
+//             opacity: 0;
+//         }
+//         .menu__line:nth-child(3) {
+//             transform: translateY(-3px) rotate(-45deg);
+//         }
+//     }
+// }
+
+// .menu__text {
+//     @include font(24px, 1.25, 600);
+//     text-transform: uppercase;
+// }
+
+// .burger-menu {
+//   position: absolute;
+//   top: 400px;
+//   left: 0;
+//   width: 100%;
+//   box-sizing: border-box;
+//   padding: 0 24px;
+//   margin-top: 0px;
+//   opacity: 0;
+//   transform: translateY(-10px);
+//   transition: opacity 0.2s ease, transform 0.2s ease;
+
+//   &.is-open {
+//     opacity: 1;
+//     transform: translateY(0);
+//     transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
+//   }
+
+//   &__list {
+//     list-style: none;
+//     padding: 0;
+//     margin: 0;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     width: 100%;
+//     gap: 5px;
+//   }
+
+//   &__item {
+//     width: 100%;
+//     text-align: center;
+//     border-radius: 10px;
+//     overflow: hidden;
+
+//     &.is-active {
+//       background-color: var(--color-text);
+//       .burger-menu__link {
+//         color: var(--color-btn__text);
+//       }
+//     }
+//   }
+
+//   &__link {
+//     display: block;
+//     padding: 14px 0;
+//     font-family: var(--font-main);
+//     font-size: 18px;
+//     font-weight: 600;
+//     text-transform: uppercase;
+//     text-decoration: none;
+//     color: var(--color-text);
+//     transition: background-color 0.2s ease, color 0.2s ease;
+
+//     &:hover {
+//       background-color: rgba(0, 0, 0, 0.04);
+//     }
+//   }
+// }
+
+
+
+// .burger-menu {
+//     position: absolute;
+//     top: 100%;
+//     right: 0;
+//     width: 500px;
+//     height: 600px;
+//     background: var(--color-bg__main);
+//     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+//     border-radius: 12px;
+//     z-index: 99;
+//     display: none;    
+//     &.is-open {
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//     }
+//     margin-top: 12px;
+//     &__item {
+//         transition: background-color 0.5s ease;
+//         &:hover {
+//             background-color: var(--color-dark-bg);
+//         }
+//     }
+// }
+
+// .burger-menu__list {
+//     list-style: none;
+//     padding: 0;
+//     margin: 0;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     gap: 15px;
+// }
+
+// .burger-menu__link {
+//     @extend %font-h3;
+//     color: var(--color-black);
+//     font-weight: bold;
+// }

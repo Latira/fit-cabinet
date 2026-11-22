@@ -22,6 +22,15 @@ $font-h1-lh: 1.1;
 
     //из базового style.css
 :root {
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-accent: #0055FF;
+    --color-white-bg: rgba(255, 255, 255, 0.5);
+    --color-line: #AD9F69;
+    --color-dark-bg: #25252580;
+    --color-burger-text: #FFEDCC;
+
+
     --color-bg__main: linear-gradient(to bottom, #E7FAAF 0%, #C6F5EE 100%);
     --color-bg: #F9F2D7;
     --color-text: #48494B;
@@ -106,6 +115,14 @@ $font-h1-lh: 1.1;
 }
 
 html.Dark {
+    --color-white: #1e293b;
+    --color-black: #F9F2D7;
+    --color-accent: #ccff00;
+    --color-white-bg: rgba(30, 41, 59, 0.5);
+    --color-line: #ffe066;
+    --color-dark-bg: #ffffff50;
+    --color-burger-text: #252525;
+
     --color-bg__main: linear-gradient(to bottom, #141A13 0%, #0F181A 100%);
     --color-bg: #020c20;
     --color-text: #F9F2D7;

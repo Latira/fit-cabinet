@@ -15,11 +15,8 @@ export function createHeader(): HTMLElement {
   const line2 = el('span', 'menu__line');
   const line3 = el('span', 'menu__line');
   menuBurger.append(line1, line2, line3);
-  menu.append(menuText, menuBurger);
   logoBack.append(logoImg, logoTitle);
   logoLink.append(logoBack);
-  headerWrapper.append(logoLink, menu);
-  header.append(headerWrapper);
 
   const burgerMenu = el('div', 'burger-menu'); 
   const nav = el('nav', 'burger-menu__nav');
@@ -38,6 +35,7 @@ export function createHeader(): HTMLElement {
   const pageContainer = document.querySelector('.app-content') as HTMLElement;
 
   const closeMenu = () => {
+    menu.classList.remove('is-open');
     menuBurger.classList.remove('is-active');
     burgerMenu.classList.remove('is-open');
   };
@@ -53,6 +51,13 @@ export function createHeader(): HTMLElement {
 
     link.addEventListener('click', (event) => {
       event.preventDefault();
+      event.stopPropagation();
+
+      menuList.querySelectorAll('.burger-menu__item').forEach(el => {
+        el.classList.remove('is-active');
+      });
+      listItem.classList.add('is-active');
+
       closeMenu();
             
       const container = pageContainer || document.querySelector('.app-content') as HTMLElement;
@@ -67,21 +72,43 @@ export function createHeader(): HTMLElement {
 
   nav.append(menuList);
   burgerMenu.append(nav);
-  header.append(burgerMenu)
 
 
-  menu.addEventListener('click', () => {
+  menu.addEventListener('click', (event) => {
+    const target = event.target as HTMLElement;
+    if (target.closest('.burger-menu')) return;
+    menu.classList.toggle('is-open');
     menuBurger.classList.toggle('is-active');
     burgerMenu.classList.toggle('is-open');
   });
 
+  burgerMenu.addEventListener('click', (event) => {
+    event.stopPropagation();
+  });
+
+  document.addEventListener('click', (event) => {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.menu') && burgerMenu.classList.contains('is-open')) {
+      closeMenu();
+    }
+  })
+
   logoLink.addEventListener('click', (event) => {
     event.preventDefault();
+
+    menuList.querySelectorAll('.burger-menu__item').forEach(el => {
+      el.classList.remove('is-active');
+    });
+    closeMenu();
+
     const pageContainer = document.querySelector('.app-content') as HTMLElement;
     if (pageContainer) {
       navigateTo('/', pageContainer);
     }
   })
 
+  menu.append(menuText, menuBurger, burgerMenu);
+  headerWrapper.append(logoLink, menu);
+  header.append(headerWrapper);
   return header;
 }
