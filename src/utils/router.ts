@@ -4,22 +4,25 @@ import { createExercisesPage } from '../pages/exercises';
 import { createAbout } from '../pages/about-us';
 import { createWorkouts } from '../pages/workouts';
 import { createWorkoutPage } from '../pages/createWorkout';
+import { createFoodDiary } from '../pages/foodDiary';
+import { createNotes } from '../pages/notes';
+import { createHabits } from '../pages/habits';
 
 const routes: Record<string, () => HTMLElement> = {
   '/': createDashboard,
   '/settings': createSettings,
   '/exercises': createExercisesPage,
   '/about': createAbout,
-  // '/food-diary': createFoodDiary,
+  '/food-diary': createFoodDiary,
   '/workouts': createWorkouts,
   '/create-workout': createWorkoutPage,
-  // '/notes': createNotes,
+  '/notes': createNotes,
+  '/habits': createHabits,
   // '/wishlist': createWishlist,
 };
 
 export function renderRoute(container: HTMLElement): void {
   const path = window.location.pathname;
-  // const createPage = routes[path] || createSettings;
   const createPage = routes[path] || createDashboard;
 
   container.replaceChildren(createPage());
