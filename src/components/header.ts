@@ -23,6 +23,7 @@ export function createHeader(): HTMLElement {
   const menuList = el('ul', 'burger-menu__list');
 
   const menuItems = [
+    { name: 'Main', path: '/' },
     { name: 'About Us', path: '/about' },
     { name: 'Food Diary', path: '/food-diary' },
     { name: 'Workouts', path: '/workouts' },
@@ -38,6 +39,7 @@ export function createHeader(): HTMLElement {
     menu.classList.remove('is-open');
     menuBurger.classList.remove('is-active');
     burgerMenu.classList.remove('is-open');
+    document.body.classList.remove('scroll-lock');
   };
 
   menuItems.forEach(item => {
@@ -77,9 +79,14 @@ export function createHeader(): HTMLElement {
   menu.addEventListener('click', (event) => {
     const target = event.target as HTMLElement;
     if (target.closest('.burger-menu')) return;
-    menu.classList.toggle('is-open');
+    const isOpen = menu.classList.toggle('is-open');
     menuBurger.classList.toggle('is-active');
     burgerMenu.classList.toggle('is-open');
+    if (isOpen) {
+      document.body.classList.add('scroll-lock');
+    } else {
+      document.body.classList.remove('scroll-lock');
+    }
   });
 
   burgerMenu.addEventListener('click', (event) => {

@@ -1,6 +1,13 @@
 @use '../base/variables' as *;
 @use '../base/mixins' as *;
 
+body.scroll-lock {
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+}
+
 header {
     position: sticky;
     top: 0;
@@ -68,14 +75,18 @@ header {
     cursor: pointer;
 
     &.is-open {
-        height: 650px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 9999;
         background: var(--color-bg__main);
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-        border-radius: 24px;
         justify-content: space-between;
         align-content: flex-start;
-        padding: 20px 70px 0px;
-        margin-top: 10px;
+        padding: 5vh 35vw;
+        margin: 0;
     }
 
     &:hover {
@@ -191,7 +202,172 @@ header {
 
 
 
+// .menu {
+//   @extend %flex-row;
+//   flex-wrap: wrap;
+//   gap: 28px;
+//   position: relative;
+//   width: 500px;
+//   height: 60px;
+//   padding: 0px 24px;
+//   margin-left: auto;
+//   justify-content: flex-end;
+//   box-sizing: border-box;
+//   background: transparent;
+//   overflow: hidden;
+//   align-self: flex-start;
+//   margin-top: 30px;
+//   transition: background-color 0.3s ease; 
+//   cursor: pointer;
+//   z-index: 100; // Гарантируем, что меню будет поверх остального контента
 
+//   &.is-open {
+//     // Делаем контейнер фиксированным на весь экран
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     width: 100vw;
+//     height: 100vh;
+//     margin: 0;
+//     padding: 40px;
+    
+//     // Центрируем само бургер-меню по экрану
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center; 
+//     align-items: center;
+    
+//     // Блюр фона и полупрозрачная подложка
+//     background: rgba(255, 255, 255, 0.2); // Подберите цвет под ваш дизайн (белый или темный полупрозрачный)
+//     backdrop-filter: blur(10px); // Эффект размытия заднего плана
+//     -webkit-backdrop-filter: blur(10px); // Поддержка Safari
+//     box-shadow: none;
+//     border-radius: 0;
+//   }
+
+//   &:hover {
+//     .menu__burger {
+//       background-color: var(--color-white-bg);
+//     }
+//     .menu__text {
+//       text-shadow: 0 0 8px rgba(0, 85, 255, 0.4);
+//     }
+//   }
+
+//   &__text {
+//     @extend %font-p;
+//     color: var(--color-black);
+//     transition: text-shadow 0.3s ease, color 0.3s ease;
+//   }
+
+//   &__burger {
+//     @extend %flex-column;
+//     justify-content: center;
+//     gap: 7px;
+//     width: 60px;
+//     height: 60px;
+//     background-color: transparent;
+//     border-radius: 50%;
+//     transition: background-color 0.5s ease;
+    
+//     // При открытом меню кнопку "Х" (закрыть) фиксируем в верхнем углу
+//     .menu.is-open & {
+//       position: absolute;
+//       top: 30px;
+//       right: 40px;
+//     }
+//   }
+
+//   &__line {
+//     display: block;
+//     width: 40px;
+//     height: 4px;
+//     background-color: var(--color-black);
+//     border-radius: 2px;
+//     transition: transform 0.5s ease, opacity 0.3s ease;
+//     transform-origin: center;
+//   }
+
+//   &__burger.is-active {
+//     gap: 0;
+//     .menu__line:nth-child(1) {
+//       transform: translateY(4px) rotate(45deg);
+//     }
+//     .menu__line:nth-child(2) {
+//       opacity: 0;
+//     }
+//     .menu__line:nth-child(3) {
+//       transform: translateY(-4px) rotate(-45deg);
+//     }
+//   }
+// }
+
+// .menu__text {
+//   @include font(24px, 1.25, 600);
+//   text-transform: uppercase;
+  
+//   // Скрываем слово MENU при открытом состоянии, чтобы остался только крестик
+//   .menu.is-open & {
+//     display: none;
+//   }
+// }
+
+// .burger-menu {
+//   // Задаем фиксированную максимальную ширину для списка ссылок по центру
+//   max-width: 400px; 
+//   width: 100%;
+//   margin-top: 0; // Сбрасываем верхний отступ
+//   opacity: 0;
+//   transform: scale(0.95); // Красивое появление из легкого масштабирования
+//   transition: opacity 0.2s ease, transform 0.2s ease;
+
+//   &.is-open {
+//     opacity: 1;
+//     transform: scale(1);
+//     transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+//   }
+
+//   &__list {
+//     list-style: none;
+//     padding: 0;
+//     margin: 0;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     gap: 15px; // Добавим небольшой отступ между пунктами меню
+//     width: 100%;
+//   }
+
+//   &__item {
+//     width: 100%;
+//     text-align: center;
+//     border-radius: 10px;
+//     overflow: hidden;
+//     transition: background-color 0.5s ease;
+
+//     &.is-active {
+//       background-color: var(--color-text);
+//       .burger-menu__link {
+//         color: var(--color-btn__text);
+//       }
+//     }
+    
+//     &:hover {
+//       background-color: var(--color-dark-bg);
+//       .burger-menu__link {
+//         color: var(--color-burger-text);
+//       }
+//     }
+//   }
+
+//   &__link {
+//     display: block;
+//     padding: 14px 0;
+//     @extend %font-h2;
+//     color: var(--color-black);
+//     transition: background-color 0.5s ease, color 0.5s ease;
+//   }
+// }
 
 
 

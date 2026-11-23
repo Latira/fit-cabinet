@@ -1,0 +1,244 @@
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+.food-diary {
+  @extend %flex-column;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px 50px;
+  box-sizing: border-box;
+  color: var(--color-black);
+
+  .food-diary__title {
+    margin-bottom: 30px;
+  }
+
+  &__controls {
+    @include flex(space-between, flex-end); // Выравнивание по нижней линии
+    width: 100%;
+    margin-bottom: 40px;
+    gap: 30px;
+
+    .food-diary__add-meal {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+
+      &__text {
+        color: var(--color-black);
+      }
+
+      &__btn {
+        @include base-btn;
+        padding: 0 30px;
+        color: var(--color-white);
+        transition: opacity 0.2s ease-in-out;
+
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+    }
+
+    .food-diary__calendar {
+      background-color: var(--color-white-bg);
+      border: 1px solid var(--color-line);
+      border-radius: 12px;
+      padding: 16px 24px;
+      text-align: center;
+      white-space: pre-line;
+      @include font(13px, 1.4, 600);
+      color: var(--color-black);
+      min-width: 260px;
+      box-sizing: border-box;
+    }
+  }
+
+  .nutrition-widget {
+    width: 100%;
+    padding: 30px;
+    border-radius: 16px;
+    background-color: var(--color-white-bg);
+    box-sizing: border-box;
+    margin-bottom: 40px;
+
+    &__title {
+      margin-bottom: 25px;
+      text-align: left;
+    }
+
+    &__content {
+      @include flex(space-between, center);
+      width: 100%;
+      gap: 40px;
+    }
+
+    &__circle {
+      @include flex(center, center);
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: conic-gradient(var(--color-accent) 19%, var(--color-light-grey) 0);
+      position: relative;
+      flex-shrink: 0;
+
+      &::after {
+        content: '';
+        position: absolute;
+        width: 88px;
+        height: 88px;
+        border-radius: 50%;
+        background-color: var(--color-white);
+      }
+
+      .nutrition-widget__circle-text {
+        @include font(11px, 1.2, 600);
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        white-space: pre-line;
+      }
+    }
+
+    .nutrition-widget__main-info {
+      @extend %flex-column;
+      align-items: flex-start;
+      gap: 15px;
+      flex-grow: 1;
+
+      .nutrition-widget__kcal-val {
+        @include font(32px, 1.1, 700);
+        color: var(--color-black);
+      }
+
+      .kCal__divider {
+        width: 100%;
+        height: 1px;
+        background-color: var(--color-line);
+        opacity: 0.5;
+      }
+    }
+
+    .nutrition-widget__bju-grid {
+      @extend %flex-row;
+      gap: 30px;
+      width: 100%;
+
+      .bju-content {
+        @extend %flex-column;
+        align-items: flex-start;
+        gap: 5px;
+
+        .bju-item {
+          display: flex;
+          align-items: center;
+          @include font(15px, 1.2, 700);
+          color: var(--color-black);
+          margin: 0;
+          gap: 6px;
+        }
+
+        // &::after {
+        //   content: '•';
+        //   color: var(--color-accent);
+        //   font-size: 18px;
+        //   line-height: 1;
+        // }
+
+        .bju-name {
+          @include font(12px, 1.2, 400);
+          color: var(--color-grey);
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  .meals-list {
+    @extend %flex-column;
+    width: 100%;
+    gap: 15px;
+
+    .meal-card {
+      @include flex(space-between, center);
+      width: 100%;
+      padding: 16px 24px;
+      border-radius: 12px;
+      background-color: var(--color-white-bg);
+      box-sizing: border-box;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+
+      .meal-card__icon {
+        @include flex(center, center);
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: var(--color-accent-gradient);
+        flex-shrink: 0;
+        margin-right: 20px;
+
+        .meal-card__svg {
+          width: 52px;
+          height: 52px;
+          color: var(--color-white); 
+        }
+      }
+
+      .meal-card__info {
+        flex: 1;
+
+        .meal-card__type {
+          @include font(16px, 1.2, 700);
+          text-transform: uppercase;
+          margin-bottom: 4px;
+        }
+
+        .meal-card__description {
+          @include font(13px, 1.3, 400);
+          color: var(--color-grey);
+          margin: 0;
+        }
+      }
+
+      .meal-card__calories {
+        @include font(16px, 1.1, 700);
+        color: var(--color-black);
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 650px) {
+  .food-diary {
+    padding: 20px 15px;
+
+    .food-diary__controls {
+      flex-direction: column-reverse;
+      align-items: stretch;
+      gap: 20px;
+
+      .food-diary__calendar {
+        width: 100%;
+      }
+    }
+
+    .nutrition-widget__content {
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .nutrition-widget__main-info {
+      align-items: center;
+    }
+
+    .nutrition-widget__bju-grid {
+      justify-content: center;
+      gap: 20px;
+    }
+  }
+}

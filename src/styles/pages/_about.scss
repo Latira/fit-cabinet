@@ -1,0 +1,102 @@
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+.about {
+  @extend %flex-column;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 0 40px;
+  box-sizing: border-box;
+  color: var(--color-black);
+
+  &__title {
+    margin-bottom: 40px;
+  }
+
+  &__list {
+    @include flex(space-between, center);
+    width: 100%;
+    padding: 40px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    background-color: var(--color-grey-bg);
+    box-sizing: border-box;
+
+    .about__card {
+      flex: 1;
+      text-align: center;
+      @extend %flex-column;
+      .about__name {
+        margin-bottom: 8px;
+      }
+
+      .about__github-link {
+        @include font($font-p-size, $font-p-lh, 400);
+        text-decoration: none;
+        transition: color 0.2s ease-in-out;
+        color: var(--color-grey);
+        margin-bottom: 12px;
+
+        &:hover {
+          color: var(--color-accent);
+        }
+      }
+    }
+
+    .about__divider {
+      width: 1px;
+      height: 120px;
+      margin: 0 30px;
+      background-color: var(--color-line);
+    }
+  }
+
+  &__project {
+    width: 100%;
+    padding: 30px;
+    border-radius: 12px;
+    background-color: var(--color-grey-bg);
+    box-sizing: border-box;
+
+    &__intro {
+      @include font($font-p-size, $font-p-lh, 600);
+      margin-bottom: 20px;
+    }
+
+    &__text {
+      @include font($font-p-size, $font-p-lh, 400);
+      white-space: pre-line;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .about {
+    padding: 20px 15px;
+
+    &__title {
+      margin-bottom: 30px;
+    }
+
+    &__list {
+      flex-direction: column;
+      padding: 30px 20px;
+      gap: 25px;
+
+      .about__card {
+        width: 100%;
+      }
+
+      .about__divider {
+        width: 60%;
+        height: 1px;
+        margin: 0 auto;
+      }
+    }
+
+    &__project {
+      padding: 20px;
+    }
+  }
+}
