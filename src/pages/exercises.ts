@@ -79,7 +79,7 @@ export function createExercisesPage(): HTMLElement {
     const selectedExStr = localStorage.getItem('selected_exercise');
     if (selectedExStr) {
         const selectedEx: Exercise = JSON.parse(selectedExStr);
-        localStorage.removeItem('selected_exercise'); // сразу очищаем, чтобы при обычном открытии библиотеки карточка была скрыта
+        localStorage.removeItem('selected_exercise');
         openExercisePreview(selectedEx);
     }
 
