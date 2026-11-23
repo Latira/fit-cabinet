@@ -8,6 +8,7 @@ import { createFoodDiary } from '../pages/foodDiary';
 import { createNotes } from '../pages/notes';
 import { createHabits } from '../pages/habits';
 import { createWishlist } from '../pages/gearWishList';
+import { isAuthenticated, openAuthModal } from '../components/authModal';
 
 const routes: Record<string, () => HTMLElement> = {
   '/': createDashboard,
@@ -22,9 +23,25 @@ const routes: Record<string, () => HTMLElement> = {
   '/wishlist': createWishlist,
 };
 
+const PUBLIC_ROUTES = new Set(['/']);
+
 export function renderRoute(container: HTMLElement): void {
   const path = window.location.pathname;
   const createPage = routes[path] || createDashboard;
+
+  if (!PUBLIC_ROUTES.has(path) && !isAuthenticated()) {
+    container.replaceChildren(routes['/']());
+
+    openAuthModal(
+      () => {
+        container.replaceChildren(createPage());
+      },
+      () => {
+        window.history.replaceState({}, '', '/');
+      }
+    );
+    return;
+  }
 
   container.replaceChildren(createPage());
 }
