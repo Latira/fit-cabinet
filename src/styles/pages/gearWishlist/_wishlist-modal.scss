@@ -1,0 +1,117 @@
+@use '../../base/variables' as *;
+@use '../../base/mixins' as *;
+
+.wishlist-modal {
+    &__form {
+        @extend %flex-column;
+        align-items: stretch;
+        gap: 10px;
+        width: 100%;
+    }
+
+    &__label {
+        @include font(15px, 1.2, 600);
+        color: var(--color-label);
+    }
+
+    &__input {
+        @include font(16px, 1.3, 400);
+        width: 100%;
+        padding: 12px 18px;
+        border: 1px solid var(--color-input__border);
+        border-radius: 16px;
+        background-color: var(--color-input__bg);
+        color: var(--color-text);
+        outline: none;
+        transition:
+            background-color 0.25s ease,
+            border-color 0.25s ease,
+            box-shadow 0.25s ease;
+
+        &::placeholder {
+            color: var(--color-label);
+            opacity: 0.7;
+        }
+
+        &:hover {
+            background-color: var(--color-input__bg-hover);
+            border-color: var(--color-input__border-hover);
+        }
+
+        &:focus {
+            background-color: var(--color-input__bg-active);
+            border-color: var(--color-input__border-active);
+            box-shadow: 0 0 0 3px var(--color-input__shadow-active);
+        }
+    }
+
+    &__file-wrap {
+        @extend %flex-column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    &__file-input {
+        @include font(14px, 1.2, 400);
+        color: var(--color-label);
+        padding: 10px 14px;
+        border-radius: 14px;
+        border: 1px dashed var(--color-input__border);
+        background-color: var(--color-input__bg);
+        cursor: pointer;
+    }
+
+    &__preview {
+        @include flex(space-between, center);
+        gap: 12px;
+    }
+
+    &__preview-img {
+        width: 64px;
+        height: 64px;
+        border-radius: 12px;
+        object-fit: cover;
+        border: 1px solid var(--color-border__theme);
+    }
+
+    &__remove-img {
+        @include font(13px, 1.2, 600);
+        color: #e53935;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    &__footer {
+        @include flex(flex-end, center);
+        gap: 12px;
+        width: 100%;
+    }
+
+    &__btn {
+        @include font(15px, 1.2, 600);
+        padding: 10px 24px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &--cancel {
+            background-color: transparent;
+            color: var(--color-label);
+            border: 1px solid var(--color-border__theme);
+
+            &:hover {
+                color: var(--color-text);
+                border-color: var(--color-text);
+            }
+        }
+
+        &--save {
+            background-color: var(--color-btn__bg);
+            color: var(--color-btn__text);
+
+            &:hover {
+                opacity: 0.9;
+            }
+        }
+    }
+}

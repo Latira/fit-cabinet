@@ -1,0 +1,83 @@
+@use '../../base/variables' as *;
+@use '../../base/mixins' as *;
+
+.gear-wish-list {
+    &__controls {
+        @include flex(space-between, center);
+        flex-wrap: wrap;
+        gap: 14px;
+        width: 100%;
+        margin-bottom: 24px;
+    }
+
+    &__search {
+        @include font(15px, 1.2, 400);
+        flex: 1 1 240px;
+        padding: 10px 16px;
+        border-radius: 16px;
+        border: 1px solid var(--color-input__border);
+        background-color: var(--color-input__bg);
+        color: var(--color-text);
+        outline: none;
+        transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+
+        &::placeholder {
+            color: var(--color-label);
+            opacity: 0.7;
+        }
+
+        &:focus {
+            background-color: var(--color-input__bg-active);
+            border-color: var(--color-input__border-active);
+            box-shadow: 0 0 0 3px var(--color-input__shadow-active);
+        }
+    }
+
+    &__filters {
+        @include flex(flex-start, center);
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    &__filter-btn {
+        @include font(14px, 1.2, 600);
+        padding: 9px 16px;
+        border-radius: 20px;
+        border: 1px solid var(--color-input__border);
+        background-color: var(--color-input__bg);
+        color: var(--color-text);
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+            border-color: var(--color-input__border-active);
+        }
+
+        &.is-active {
+            background-color: var(--color-btn__bg);
+            color: var(--color-btn__text);
+            border-color: var(--color-btn__bg);
+        }
+    }
+
+    &__sort {
+        @include font(14px, 1.2, 500);
+        padding: 10px 14px;
+        border-radius: 16px;
+        border: 1px solid var(--color-input__border);
+        background-color: var(--color-input__bg);
+        color: var(--color-text);
+        cursor: pointer;
+        outline: none;
+        transition: border-color 0.2s ease;
+
+        &:focus {
+            border-color: var(--color-input__border-active);
+        }
+
+        option {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+        }
+    }
+}

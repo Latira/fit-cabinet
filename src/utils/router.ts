@@ -7,6 +7,7 @@ import { createWorkoutPage } from '../pages/createWorkout';
 import { createFoodDiary } from '../pages/foodDiary';
 import { createNotes } from '../pages/notes';
 import { createHabits } from '../pages/habits';
+import { createWishlist } from '../pages/gearWishList';
 
 const routes: Record<string, () => HTMLElement> = {
   '/': createDashboard,
@@ -18,7 +19,7 @@ const routes: Record<string, () => HTMLElement> = {
   '/create-workout': createWorkoutPage,
   '/notes': createNotes,
   '/habits': createHabits,
-  // '/wishlist': createWishlist,
+  '/wishlist': createWishlist,
 };
 
 export function renderRoute(container: HTMLElement): void {

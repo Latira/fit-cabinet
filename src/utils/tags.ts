@@ -30,7 +30,7 @@ export const createImg = (
   return img;
 }
 
-type InputType = 'text' | 'number' | 'password' | 'email' | 'file' | 'checkbox' | 'radio' | 'time';
+type InputType = 'text' | 'number' | 'password' | 'email' | 'url' | 'file' | 'checkbox' | 'radio' | 'time';
 
 export const createInput = (
   className: string,

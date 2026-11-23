@@ -1,0 +1,67 @@
+@use '../../base/variables' as *;
+@use '../../base/mixins' as *;
+
+.gear-wish-list {
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        width: 100%;
+
+        @media (max-width: 900px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: 560px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__card-add {
+        @extend %flex-column;
+        justify-content: center;
+        align-items: center;
+        min-height: 220px;
+        padding: 20px;
+        border-radius: 20px;
+        background-color: var(--color-surface__secondary);
+        border: 1px dashed var(--color-border__theme);
+        transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+
+        &:hover {
+            transform: translateY(-3px);
+            border-color: var(--color-input__border-active);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+    }
+
+    &__add-btn {
+        @include flex(center, center);
+        width: 100%;
+        height: 100%;
+        color: var(--color-text);
+        cursor: pointer;
+        transition: color 0.2s ease, transform 0.2s ease;
+
+        &:hover {
+            color: var(--color-input__border-active);
+            transform: scale(1.05);
+        }
+    }
+
+    &__img {
+        width: 64px;
+        height: 64px;
+    }
+
+    &__show-more {
+        @include base-btn;
+        align-self: center;
+        margin-top: 28px;
+        padding: 0 36px;
+
+        &[hidden] {
+            display: none;
+        }
+    }
+}
