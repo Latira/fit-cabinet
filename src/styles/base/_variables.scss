@@ -19,6 +19,7 @@ $font-h1-lh: 1.1;
     --color-black: #000000;
     --color-accent: #0055FF;
     --color-accent-bg: #0055FF50;
+    --color-accent-gradient: linear-gradient(to bottom right, #408CFF 0%, #1F54F0 50%, #302680 100%);
     --color-white-bg: rgba(255, 255, 255, 0.5);
     --color-white-bg-hover: rgba(255, 255, 255, 0.7);
     --color-line: #AD9F69;
@@ -117,6 +118,7 @@ html.Dark {
     --color-black: #F9F2D7;
     --color-accent: #ccff00;
     --color-accent-bg: #ccff0050;
+    --color-accent-gradient: linear-gradient(to bottom right, #ccff00 0%, #7aa600 50%, #1a3300 100%);
     --color-white-bg: rgba(30, 41, 59, 0.5);
     --color-white-bg-hover: rgba(30, 41, 59, 0.7);
     --color-line: #ffe066;
