@@ -7,6 +7,11 @@ import { createTabs } from '../components/tabs';
 import { createFaqSlider } from '../pages/settings/faq-tab';
 import { createSecurityTab } from '../pages/settings/security-tab';
 import { createGoalsTab } from '../pages/settings/goals-tab';
+import { navigateTo } from '../utils/router';
+import { getCurrentUser, logoutUser } from '../components/authModal';
+
+const AVATAR_STORAGE_KEY = 'fit_cabinet_avatar';
+const AUTH_STORAGE_KEY = 'fit_cabinet_user';
 
 export function createSettings(): HTMLElement {
     const settings = el('main', 'settings');
@@ -46,11 +51,27 @@ export function createSettings(): HTMLElement {
     const profileBg = el('div', 'settings__user--bg');
     const profileIcon = createSvgIcon(userPlusSvg, 'settings__user--icon');
     const profilePreview = createImg('settings__user--preview', '', 'Avatar preview');
-    profilePreview.hidden = true;
-    profilePreview.style.display = 'none';
+
+    const applyAvatarView = (src: string | null) => {
+        if (src) {
+            profilePreview.src = src;
+            profilePreview.hidden = false;
+            profilePreview.style.display = 'block';
+            profileIcon.style.display = 'none';
+        } else {
+            profilePreview.src = '';
+            profilePreview.hidden = true;
+            profilePreview.style.display = 'none';
+            profileIcon.style.display = 'block';
+        }
+    };
+
+    applyAvatarView(localStorage.getItem(AVATAR_STORAGE_KEY));
 
     profileBg.append(profileIcon, profilePreview);
     profileBtn.append(profileBg);
+
+    let pendingAvatarBase64: string | null = null;
 
     fileInput.addEventListener('change', () => {
         const file = fileInput.files?.[0];
@@ -61,11 +82,13 @@ export function createSettings(): HTMLElement {
             return;
         }
 
-        const url = URL.createObjectURL(file);
-        profilePreview.src = url;
-        profilePreview.hidden = false;
-        profilePreview.style.display = 'block';
-        profileIcon.style.display = 'none';
+        const reader = new FileReader();
+        reader.onload = () => {
+            const base64 = String(reader.result || '');
+            pendingAvatarBase64 = base64;
+            applyAvatarView(base64);
+        };
+        reader.readAsDataURL(file);
     });
 
     const formData = el('div', 'settings__form');
@@ -86,6 +109,12 @@ export function createSettings(): HTMLElement {
 
     formData.append(nameField, emailField);
 
+    const currentUser = getCurrentUser();
+    if (currentUser) {
+        nameInput.value = currentUser.name;
+        emailInput.value = currentUser.email;
+    }
+
     const faqContent = createFaqSlider();
     const goalsContent = createGoalsTab();
     const securityContent = createSecurityTab();
@@ -98,6 +127,9 @@ export function createSettings(): HTMLElement {
 
     const signOutBtn = createBtn('settings__signout-button', 'SIGN OUT OF ACCOUNT');
     signOutBtn.addEventListener('click', () => {
+        logoutUser();
+        const container = (document.querySelector('.app-content') as HTMLElement) || document.body;
+        navigateTo('/', container);
     });
 
     settings.append(heading, profileBtn, fileInput, formData, tabsBlock, signOutBtn);
@@ -126,12 +158,40 @@ export function createSettings(): HTMLElement {
     setEditMode(false);
 
     editBtn.addEventListener('click', () => {
+        if (isEditing) {
+            pendingAvatarBase64 = null;
+            fileInput.value = '';
+            applyAvatarView(localStorage.getItem(AVATAR_STORAGE_KEY));
+
+            const savedUser = getCurrentUser();
+            if (savedUser) {
+                nameInput.value = savedUser.name;
+                emailInput.value = savedUser.email;
+            }
+        }
         setEditMode(!isEditing);
     });
 
     saveAllBtn.addEventListener('click', () => {
+        if (pendingAvatarBase64) {
+            localStorage.setItem(AVATAR_STORAGE_KEY, pendingAvatarBase64);
+            pendingAvatarBase64 = null;
+        }
+
+        const user = getCurrentUser();
+        if (user) {
+            localStorage.setItem(
+                AUTH_STORAGE_KEY,
+                JSON.stringify({
+                    ...user,
+                    name: nameInput.value.trim() || user.name,
+                    email: emailInput.value.trim() || user.email,
+                })
+            );
+        }
+
         setEditMode(false);
     });
-    
+
     return settings;
 }
