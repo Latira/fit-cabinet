@@ -18,7 +18,6 @@ export interface SavedWorkout {
 }
 
 export function createWorkoutPage(): HTMLElement {
-    // 1. Проверяем, редактируем ли мы существующую тренировку
     const editingStr = localStorage.getItem('editing_workout');
     const editingWorkout: SavedWorkout | null = editingStr ? JSON.parse(editingStr) : null;
 
@@ -30,7 +29,6 @@ export function createWorkoutPage(): HTMLElement {
     );
     const form = el('form', 'create-workout-page__form');
 
-    // --- Поля ввода (подставляем значения при редактировании) ---
     const nameLabel = el('label', 'create-workout-page__label', 'Workout name');
     nameLabel.htmlFor = 'workout-name';
     const nameInput = createInput('create-workout-page__input', 'text', 'e.g., Morning Run', 'workout-name');
@@ -47,14 +45,12 @@ export function createWorkoutPage(): HTMLElement {
         durationInput.value = String(editingWorkout.duration);
     }
 
-    // --- Секция упражнений ---
     const exercisesSection = el('div', 'create-workout-page__exercises');
     const exercisesTitle = el('h3', 'create-workout-page__exercises-title', 'Exercises');
     const exercisesList = el('div', 'create-workout-page__exercises-list');
 
     const addExerciseBtn = createBtn('create-workout-page__add-exercise-btn', '+ Add Exercise');
 
-    // 2. Загружаем упражнения из редактируемой тренировки, если она есть
     let selectedExercises: WorkoutExercise[] = editingWorkout
         ? editingWorkout.exercises.map((ex) => ({ ...ex }))
         : [];
@@ -83,7 +79,6 @@ export function createWorkoutPage(): HTMLElement {
 
             const itemSettings = el('div', 'create-workout-page__ex-settings');
 
-            // Подходы (Sets)
             const setsGroup = el('div', 'create-workout-page__ex-field');
             const setsLabel = el('label', 'create-workout-page__ex-label', 'Sets');
             const setsInput = createInput('create-workout-page__ex-input', 'number', '3', `sets-${index}`);
@@ -93,7 +88,6 @@ export function createWorkoutPage(): HTMLElement {
             });
             setsGroup.append(setsLabel, setsInput);
 
-            // Повторения (Reps)
             const repsGroup = el('div', 'create-workout-page__ex-field');
             const repsLabel = el('label', 'create-workout-page__ex-label', 'Reps');
             const repsInput = createInput('create-workout-page__ex-input', 'number', '10', `reps-${index}`);
@@ -103,7 +97,6 @@ export function createWorkoutPage(): HTMLElement {
             });
             repsGroup.append(repsLabel, repsInput);
 
-            // Отдых (Rest)
             const restGroup = el('div', 'create-workout-page__ex-field');
             const restLabel = el('label', 'create-workout-page__ex-label', 'Rest (sec)');
             const restInput = createInput('create-workout-page__ex-input', 'number', '60', `rest-${index}`);
@@ -138,7 +131,6 @@ export function createWorkoutPage(): HTMLElement {
 
     exercisesSection.append(exercisesTitle, exercisesList, addExerciseBtn);
 
-    // --- Кнопки управления ---
     const submitBtn = createBtn(
         'create-workout-page__submit',
         editingWorkout ? 'update workout' : 'save workout',
@@ -150,11 +142,10 @@ export function createWorkoutPage(): HTMLElement {
         (document.querySelector('.app-content') as HTMLElement) || document.body;
 
     backBtn.addEventListener('click', () => {
-        localStorage.removeItem('editing_workout'); // очищаем флаг при возврате
+        localStorage.removeItem('editing_workout');
         navigateTo('/workouts', getContainer());
     });
 
-    // --- Отправка формы (Сохранение или Обновление) ---
     form.addEventListener('submit', (event) => {
         event.preventDefault();
 
@@ -168,21 +159,19 @@ export function createWorkoutPage(): HTMLElement {
         const existingWorkouts: SavedWorkout[] = existingWorkoutsStr ? JSON.parse(existingWorkoutsStr) : [];
 
         if (editingWorkout) {
-            // 3. Перезаписываем существующую тренировку по её id
             const updatedWorkouts = existingWorkouts.map((w) =>
                 w.id === editingWorkout.id
                     ? {
-                          ...w,
-                          name: nameInput.value.trim(),
-                          duration: Number(durationInput.value) || 0,
-                          exercises: selectedExercises,
-                      }
+                        ...w,
+                        name: nameInput.value.trim(),
+                        duration: Number(durationInput.value) || 0,
+                        exercises: selectedExercises,
+                    }
                     : w
             );
             localStorage.setItem('workouts', JSON.stringify(updatedWorkouts));
             localStorage.removeItem('editing_workout');
         } else {
-            // 4. Создаём новую тренировку
             const newWorkout: SavedWorkout = {
                 id: `workout-${Date.now()}`,
                 name: nameInput.value.trim(),
