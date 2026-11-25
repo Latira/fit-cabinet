@@ -11,10 +11,10 @@ import { createWishlist } from '../pages/gearWishList';
 import { isAuthenticated, openAuthModal } from '../components/authModal';
 
 const routes: Record<string, () => HTMLElement> = {
-  '/': createDashboard,
+  '/': createAbout,
+  '/dashboard': createDashboard,
   '/settings': createSettings,
   '/exercises': createExercisesPage,
-  '/about': createAbout,
   '/food-diary': createFoodDiary,
   '/workouts': createWorkouts,
   '/create-workout': createWorkoutPage,

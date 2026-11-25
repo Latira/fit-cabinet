@@ -23,8 +23,8 @@ export function createHeader(): HTMLElement {
   const menuList = el('ul', 'burger-menu__list');
 
   const menuItems = [
-    { name: 'Main', path: '/' },
-    { name: 'About Us', path: '/about' },
+    { name: 'About Us', path: '/' },
+    { name: 'Dashboard', path: '/dashboard' },
     { name: 'Food Diary', path: '/food-diary' },
     { name: 'Workouts', path: '/workouts' },
     { name: 'Notes', path: '/notes' },
