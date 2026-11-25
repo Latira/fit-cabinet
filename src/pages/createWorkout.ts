@@ -17,6 +17,43 @@ export interface SavedWorkout {
     createdAt: string;
 }
 
+function setupNonNegativeInput(
+    input: HTMLInputElement,
+    initialValue: number,
+    onValueChange?: (val: number) => void
+): void {
+    input.min = '0';
+    input.step = '1';
+    input.value = String(Math.max(0, initialValue));
+
+    input.addEventListener('keydown', (e) => {
+        if (e.key === '-' || e.key === 'e' || e.key === 'E') {
+            e.preventDefault();
+        }
+    });
+
+    const clampValue = () => {
+        const parsed = Number(input.value);
+        const safeValue = Number.isNaN(parsed) || parsed < 0 ? 0 : Math.floor(parsed);
+        input.value = String(safeValue);
+        if (onValueChange) {
+            onValueChange(safeValue);
+        }
+    };
+
+    input.addEventListener('input', () => {
+        if (Number(input.value) < 0) {
+            clampValue();
+        } else if (onValueChange) {
+            const parsed = Number(input.value);
+            onValueChange(Number.isNaN(parsed) ? 0 : Math.max(0, Math.floor(parsed)));
+        }
+    });
+
+    input.addEventListener('change', clampValue);
+    input.addEventListener('blur', clampValue);
+}
+
 export function createWorkoutPage(): HTMLElement {
     const editingStr = localStorage.getItem('editing_workout');
     const editingWorkout: SavedWorkout | null = editingStr ? JSON.parse(editingStr) : null;
@@ -39,11 +76,9 @@ export function createWorkoutPage(): HTMLElement {
 
     const durationLabel = el('label', 'create-workout-page__label', 'Duration (minutes)');
     durationLabel.htmlFor = 'workout-duration';
-    const durationInput = createInput('create-workout-page__input', 'number', '30', 'workout-duration');
+    const durationInput = createInput('create-workout-page__input', 'number', '0', 'workout-duration');
     durationInput.id = 'workout-duration';
-    if (editingWorkout) {
-        durationInput.value = String(editingWorkout.duration);
-    }
+    setupNonNegativeInput(durationInput, editingWorkout ? editingWorkout.duration : 0);
 
     const exercisesSection = el('div', 'create-workout-page__exercises');
     const exercisesTitle = el('h3', 'create-workout-page__exercises-title', 'Exercises');
@@ -81,28 +116,25 @@ export function createWorkoutPage(): HTMLElement {
 
             const setsGroup = el('div', 'create-workout-page__ex-field');
             const setsLabel = el('label', 'create-workout-page__ex-label', 'Sets');
-            const setsInput = createInput('create-workout-page__ex-input', 'number', '3', `sets-${index}`);
-            setsInput.value = String(ex.sets ?? 3);
-            setsInput.addEventListener('change', () => {
-                ex.sets = Number(setsInput.value);
+            const setsInput = createInput('create-workout-page__ex-input', 'number', '0', `sets-${index}`);
+            setupNonNegativeInput(setsInput, ex.sets ?? 0, (val) => {
+                ex.sets = val;
             });
             setsGroup.append(setsLabel, setsInput);
 
             const repsGroup = el('div', 'create-workout-page__ex-field');
             const repsLabel = el('label', 'create-workout-page__ex-label', 'Reps');
-            const repsInput = createInput('create-workout-page__ex-input', 'number', '10', `reps-${index}`);
-            repsInput.value = String(ex.reps ?? 10);
-            repsInput.addEventListener('change', () => {
-                ex.reps = Number(repsInput.value);
+            const repsInput = createInput('create-workout-page__ex-input', 'number', '0', `reps-${index}`);
+            setupNonNegativeInput(repsInput, ex.reps ?? 0, (val) => {
+                ex.reps = val;
             });
             repsGroup.append(repsLabel, repsInput);
 
             const restGroup = el('div', 'create-workout-page__ex-field');
             const restLabel = el('label', 'create-workout-page__ex-label', 'Rest (sec)');
-            const restInput = createInput('create-workout-page__ex-input', 'number', '60', `rest-${index}`);
-            restInput.value = String(ex.rest ?? 60);
-            restInput.addEventListener('change', () => {
-                ex.rest = Number(restInput.value);
+            const restInput = createInput('create-workout-page__ex-input', 'number', '0', `rest-${index}`);
+            setupNonNegativeInput(restInput, ex.rest ?? 0, (val) => {
+                ex.rest = val;
             });
             restGroup.append(restLabel, restInput);
 
@@ -118,9 +150,9 @@ export function createWorkoutPage(): HTMLElement {
                 const existing = selectedExercises.find((se) => se.id === ex.id);
                 return {
                     ...ex,
-                    sets: existing?.sets ?? 3,
-                    reps: existing?.reps ?? 10,
-                    rest: existing?.rest ?? 60,
+                    sets: existing?.sets ?? 0,
+                    reps: existing?.reps ?? 0,
+                    rest: existing?.rest ?? 0,
                 };
             });
             renderSelectedExercises();
@@ -155,6 +187,14 @@ export function createWorkoutPage(): HTMLElement {
             return;
         }
 
+        const safeDuration = Math.max(0, Number(durationInput.value) || 0);
+        const safeExercises = selectedExercises.map((ex) => ({
+            ...ex,
+            sets: Math.max(0, Number(ex.sets) || 0),
+            reps: Math.max(0, Number(ex.reps) || 0),
+            rest: Math.max(0, Number(ex.rest) || 0),
+        }));
+
         const existingWorkoutsStr = localStorage.getItem('workouts');
         const existingWorkouts: SavedWorkout[] = existingWorkoutsStr ? JSON.parse(existingWorkoutsStr) : [];
 
@@ -164,8 +204,8 @@ export function createWorkoutPage(): HTMLElement {
                     ? {
                         ...w,
                         name: nameInput.value.trim(),
-                        duration: Number(durationInput.value) || 0,
-                        exercises: selectedExercises,
+                        duration: safeDuration,
+                        exercises: safeExercises,
                     }
                     : w
             );
@@ -175,8 +215,8 @@ export function createWorkoutPage(): HTMLElement {
             const newWorkout: SavedWorkout = {
                 id: `workout-${Date.now()}`,
                 name: nameInput.value.trim(),
-                duration: Number(durationInput.value) || 0,
-                exercises: selectedExercises,
+                duration: safeDuration,
+                exercises: safeExercises,
                 createdAt: new Date().toISOString(),
             };
             existingWorkouts.push(newWorkout);
