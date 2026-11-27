@@ -28,12 +28,6 @@ function createExerciseRow(
     const desc = el('div', 'exercises-table__desc', firstInstruction);
     colInfo.append(name, desc);
 
-    const colReps = el('div', 'exercises-table__col-reps');
-    colReps.append(
-        el('span', 'exercises-table__reps-val', '10–12'),
-        el('span', 'exercises-table__reps-sub', 'reps')
-    );
-
     const colMuscles = el('div', 'exercises-table__col-muscles');
     (ex.primaryMuscles || []).slice(0, 2).forEach((muscle) => {
         colMuscles.append(el('span', 'exercises-table__muscle-badge', muscle));
@@ -49,7 +43,7 @@ function createExerciseRow(
     }
 
     colActions.append(viewBtn, addBtn);
-    row.append(colInfo, colReps, colMuscles, colActions);
+    row.append(colInfo, colMuscles, colActions);
 
     return row;
 }

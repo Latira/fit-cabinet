@@ -58,6 +58,12 @@ export function createWorkoutPage(): HTMLElement {
     const editingStr = localStorage.getItem('editing_workout');
     const editingWorkout: SavedWorkout | null = editingStr ? JSON.parse(editingStr) : null;
 
+    const preselectedStr = localStorage.getItem('preselected_exercise');
+    const preselectedExercise: WorkoutExercise | null = preselectedStr ? JSON.parse(preselectedStr) : null;
+    if (preselectedExercise) {
+        localStorage.removeItem('preselected_exercise');
+    }
+
     const page = el('main', 'create-workout-page');
     const title = el(
         'h1',
@@ -88,7 +94,16 @@ export function createWorkoutPage(): HTMLElement {
 
     let selectedExercises: WorkoutExercise[] = editingWorkout
         ? editingWorkout.exercises.map((ex) => ({ ...ex }))
-        : [];
+        : preselectedExercise
+          ? [
+                {
+                    ...preselectedExercise,
+                    sets: preselectedExercise.sets ?? 0,
+                    reps: preselectedExercise.reps ?? 0,
+                    rest: preselectedExercise.rest ?? 0,
+                },
+            ]
+          : [];
     const customExercises: Exercise[] = [];
 
     const renderSelectedExercises = () => {
@@ -143,6 +158,8 @@ export function createWorkoutPage(): HTMLElement {
             exercisesList.append(item);
         });
     };
+
+    renderSelectedExercises();
 
     addExerciseBtn.addEventListener('click', () => {
         const modal = createExercisePicker((newSelection) => {
@@ -202,11 +219,11 @@ export function createWorkoutPage(): HTMLElement {
             const updatedWorkouts = existingWorkouts.map((w) =>
                 w.id === editingWorkout.id
                     ? {
-                        ...w,
-                        name: nameInput.value.trim(),
-                        duration: safeDuration,
-                        exercises: safeExercises,
-                    }
+                          ...w,
+                          name: nameInput.value.trim(),
+                          duration: safeDuration,
+                          exercises: safeExercises,
+                      }
                     : w
             );
             localStorage.setItem('workouts', JSON.stringify(updatedWorkouts));
@@ -226,17 +243,8 @@ export function createWorkoutPage(): HTMLElement {
         navigateTo('/workouts', getContainer());
     });
 
-    form.append(
-        nameLabel,
-        nameInput,
-        durationLabel,
-        durationInput,
-        exercisesSection,
-        submitBtn
-    );
-
+    form.append(nameLabel, nameInput, durationLabel, durationInput, exercisesSection, submitBtn);
     page.append(title, form, backBtn);
-    renderSelectedExercises();
 
     return page;
 }

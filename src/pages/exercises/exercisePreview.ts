@@ -1,4 +1,4 @@
-import { el, createBtn, createImg } from '../../utils/tags';
+import { el, createImg } from '../../utils/tags';
 import { type Exercise } from '../../api/exercises';
 
 const GITHUB_CDN = 'https://githubusercontent.com';
@@ -11,7 +11,16 @@ export function createExercisePreview() {
         previewCard.replaceChildren();
         previewCard.hidden = false;
 
+        const mediaWrapper = el('div', 'exercise-preview__media');
+        const showNoPreview = () => {
+            mediaWrapper.replaceChildren(
+                el('div', 'exercise-preview__no-media', 'No preview available')
+            );
+        };
+
         const video = ex.videos?.at(0);
+        const imagePath = ex.images?.at(0);
+
         if (video?.url) {
             const videoEl = document.createElement('video');
             videoEl.className = 'exercise-preview__bg';
@@ -20,41 +29,44 @@ export function createExercisePreview() {
             videoEl.muted = true;
             videoEl.loop = true;
             videoEl.playsInline = true;
-            previewCard.append(videoEl);
+            videoEl.addEventListener('error', showNoPreview);
+            mediaWrapper.append(videoEl);
+        } else if (imagePath) {
+            const cleanPath = imagePath.replace(/^\/+/, '');
+            const imageUrl = cleanPath.startsWith('http')
+                ? cleanPath
+                : `${GITHUB_CDN}/${cleanPath}`;
+            const bgImg = createImg('exercise-preview__bg', imageUrl, ex.name);
+            bgImg.addEventListener('error', showNoPreview);
+            mediaWrapper.append(bgImg);
         } else {
-            const imagePath = ex.images?.at(0);
-            if (imagePath) {
-                const imageUrl = `${GITHUB_CDN}/${imagePath.replace(/^\/+/, '')}`;
-                const bgImg = createImg('exercise-preview__bg', imageUrl, ex.name);
-                bgImg.addEventListener('error', () => bgImg.remove());
-                previewCard.append(bgImg);
-            }
+            showNoPreview();
         }
 
-        const bookmarkBtn = createBtn('exercise-preview__bookmark');
-        bookmarkBtn.setAttribute('aria-label', 'Save to favorites');
-        bookmarkBtn.addEventListener('click', () => {
-            bookmarkBtn.classList.toggle('is-saved');
-        });
-
-        const overlay = el('div', 'exercise-preview__overlay');
-
-        const leftInfo = el('div', 'exercise-preview__info');
+        const content = el('div', 'exercise-preview__content');
         const exName = el('h3', 'exercise-preview__title', ex.name);
+
         const musclesList = [...(ex.primaryMuscles || []), ...(ex.secondaryMuscles || [])]
-            .slice(0, 3)
             .join('  •  ');
-        const exMuscles = el('p', 'exercise-preview__muscles', musclesList || ex.category);
-        leftInfo.append(exName, exMuscles);
+        const exMuscles = el(
+            'p',
+            'exercise-preview__muscles',
+            musclesList || ex.category || 'General'
+        );
 
-        const rightMeta = el('div', 'exercise-preview__meta');
-        const sets = el('div', 'exercise-preview__stat', 'Sets: 3');
-        const reps = el('div', 'exercise-preview__stat', 'Reps: 10');
-        rightMeta.append(sets, reps);
+        const rawDescription = Array.isArray(ex.instructions)
+            ? ex.instructions.join(' ')
+            : (ex as Exercise & { description?: string }).description || '';
 
-        overlay.append(leftInfo, rightMeta);
-        previewCard.append(bookmarkBtn, overlay);
+        const exDescription = el(
+            'p',
+            'exercise-preview__description',
+            rawDescription || 'No description available.'
+        );
 
+        content.append(exName, exMuscles, exDescription);
+
+        previewCard.append(mediaWrapper, content);
         previewCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
     };
 
