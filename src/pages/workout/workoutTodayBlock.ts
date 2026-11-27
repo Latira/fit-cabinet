@@ -18,7 +18,8 @@ export function createWorkoutTodayBlock(
     const manualTodayId = localStorage.getItem('today_workout_id');
     const todayWorkout =
         savedWorkouts.find((w) => w.id === manualTodayId) ||
-        savedWorkouts.find((w) => isToday(w.createdAt));
+        [...savedWorkouts].reverse().find((w) => isToday(w.createdAt)) ||
+        savedWorkouts.at(-1);
 
     if (todayWorkout) {
         const todayHeader = el('div', 'workout-today__header');
@@ -64,20 +65,18 @@ export function createWorkoutTodayBlock(
             openWorkoutTimer(todayWorkout);
         });
         workoutToday.append(startTodayBtn);
-    } else {
-        const emptyTodayText = el(
-            'p',
-            'workout-today__empty-text',
-            "You don't have a workout for today yet. Create one to get started and crush your goals!"
-        );
-        const emptyTodayImg = createImg('workout-today__empty-img', emptyWorkout, 'image for empty workout');
-        const workoutTodayBtn = createBtn('workout-today__button', 'start workout');
-        workoutTodayBtn.addEventListener('click', () => {
-            localStorage.removeItem('editing_workout');
-            navigateTo('/create-workout', getContainer());
-        });
-        workoutToday.append(workoutTodayTitle, emptyTodayImg, emptyTodayText, workoutTodayBtn);
-    }
+        } else {
+            const emptyTodayText = el(
+                'p',
+                'workout-today__empty-text',
+                "You don't have a workout for today yet. Create one to get started and crush your goals!"
+            );
+            const emptyTodayImg = createImg('workout-today__empty-img', emptyWorkout, 'image for empty workout');
+            const workoutTodayBtn = createBtn('workout-today__button', 'start workout');
+            workoutTodayBtn.disabled = true;
+
+            workoutToday.append(workoutTodayTitle, emptyTodayImg, emptyTodayText, workoutTodayBtn);
+        }
 
     return workoutToday;
 }

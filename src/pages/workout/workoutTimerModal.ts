@@ -12,7 +12,7 @@ export function openWorkoutTimer(workout: SavedWorkout): void {
     const hasDuration = workout.duration > 0;
     const initialSeconds = hasDuration ? workout.duration * 60 : 0;
     let currentSeconds = initialSeconds;
-    let isRunning = true;
+    let isRunning = false;
     let timerId: number | null = null;
 
     const timerBox = el('div', 'workout-timer');
@@ -34,10 +34,19 @@ export function openWorkoutTimer(workout: SavedWorkout): void {
     });
 
     const controls = el('div', 'workout-timer__controls');
+
+    const startBtn = createBtn('workout-timer__btn workout-timer__btn--primary', 'Start');
     const toggleBtn = createBtn('workout-timer__btn workout-timer__btn--primary', 'Pause');
     const resetBtn = createBtn('workout-timer__btn', 'Reset');
     const finishBtn = createBtn('workout-timer__btn workout-timer__btn--finish', 'Finish');
-    controls.append(toggleBtn, resetBtn, finishBtn);
+
+    const showInitialControls = () => {
+        controls.replaceChildren(startBtn);
+    };
+
+    const showActiveControls = () => {
+        controls.replaceChildren(toggleBtn, resetBtn, finishBtn);
+    };
 
     timerBox.append(statusText, display, controls, exSummary);
 
@@ -57,6 +66,8 @@ export function openWorkoutTimer(workout: SavedWorkout): void {
         stopTimer();
         isRunning = true;
         toggleBtn.textContent = 'Pause';
+        toggleBtn.disabled = false;
+        showActiveControls();
 
         timerId = window.setInterval(() => {
             if (hasDuration) {
@@ -77,6 +88,10 @@ export function openWorkoutTimer(workout: SavedWorkout): void {
         }, 1000);
     };
 
+    startBtn.addEventListener('click', () => {
+        startTimer();
+    });
+
     toggleBtn.addEventListener('click', () => {
         if (isRunning) {
             stopTimer();
@@ -89,10 +104,12 @@ export function openWorkoutTimer(workout: SavedWorkout): void {
 
     resetBtn.addEventListener('click', () => {
         stopTimer();
+        isRunning = false;
         currentSeconds = initialSeconds;
         display.textContent = formatTimerSeconds(currentSeconds);
+        statusText.textContent = hasDuration ? `Target: ${workout.duration} min` : 'Stopwatch mode';
         toggleBtn.disabled = false;
-        startTimer();
+        showInitialControls();
     });
 
     finishBtn.addEventListener('click', () => {
@@ -101,7 +118,7 @@ export function openWorkoutTimer(workout: SavedWorkout): void {
         alert(`Workout "${workout.name}" completed!`);
     });
 
+    showInitialControls();
     contentArea.append(timerBox);
     document.body.append(modal);
-    startTimer();
 }

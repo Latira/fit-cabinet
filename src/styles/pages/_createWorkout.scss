@@ -48,22 +48,35 @@
         transition:
             background-color 0.25s ease,
             border-color 0.25s ease,
+            color 0.25s ease,
             box-shadow 0.25s ease;
 
         &::placeholder {
             color: var(--color-label);
-            opacity: 0.7;
+            opacity: 0.75;
         }
 
         &:hover {
             background-color: var(--color-input__bg-hover);
             border-color: var(--color-input__border-hover);
+            color: var(--color-text);
+
+            &::placeholder {
+                color: var(--color-text);
+                opacity: 0.7;
+            }
         }
 
         &:focus {
             background-color: var(--color-input__bg-active);
             border-color: var(--color-input__border-active);
+            color: var(--color-text);
             box-shadow: 0 0 0 3px var(--color-input__shadow-active);
+
+            &::placeholder {
+                color: var(--color-text);
+                opacity: 0.65;
+            }
         }
 
         &[type='number'] {
@@ -179,10 +192,22 @@
         background-color: var(--color-input__bg);
         color: var(--color-text);
         outline: none;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        transition:
+            background-color 0.2s ease,
+            border-color 0.2s ease,
+            color 0.2s ease,
+            box-shadow 0.2s ease;
+
+        &:hover {
+            background-color: var(--color-input__bg-hover);
+            border-color: var(--color-input__border-hover);
+            color: var(--color-text);
+        }
 
         &:focus {
+            background-color: var(--color-input__bg-active);
             border-color: var(--color-input__border-active);
+            color: var(--color-text);
             box-shadow: 0 0 0 2px var(--color-input__shadow-active);
         }
 

@@ -58,15 +58,23 @@ export function openWorkoutDetailsModal(
         navigateTo('/create-workout', getContainer());
     });
 
-    deleteBtn.addEventListener('click', () => {
+        deleteBtn.addEventListener('click', () => {
         const listStr = localStorage.getItem('workouts');
         const list: SavedWorkout[] = listStr ? JSON.parse(listStr) : [];
         const updatedList = list.filter((item) => item.id !== workout.id);
 
         localStorage.setItem('workouts', JSON.stringify(updatedList));
-        if (localStorage.getItem('today_workout_id') === workout.id) {
-            localStorage.removeItem('today_workout_id');
+
+        const currentTodayId = localStorage.getItem('today_workout_id');
+        if (!currentTodayId || currentTodayId === workout.id) {
+            const lastWorkout = updatedList.at(-1);
+            if (lastWorkout) {
+                localStorage.setItem('today_workout_id', lastWorkout.id);
+            } else {
+                localStorage.removeItem('today_workout_id');
+            }
         }
+
         modal.remove();
         onWorkoutsUpdated();
     });
