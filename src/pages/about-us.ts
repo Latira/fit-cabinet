@@ -10,7 +10,7 @@ export function createAbout(): HTMLElement {
   const cardDaryaLink = el('a', 'about__github-link', 'DARYADUDKOVA98');
   cardDaryaLink.setAttribute('href', 'https://github.com/DaryaDudkova98');
   cardDaryaLink.setAttribute('target', '_blank');
-  const cardDaryaBio = el('p', 'about__bio', 'Здесь будет информация обо мне, моих задачах в проекте и технологиях.');
+  const cardDaryaBio = el('p', 'about__bio', 'Отвечала за реализацию модального окна авторизации (Firebase: Google, Github) и email/пароль, за страницу настроек, тренировок и упражнений (с API фильтрацией по группам мышц и кэшированием в локальное хранилище), а также вишлиста.');
   aboutCardDarya.append(cardDaryaName, cardDaryaLink, cardDaryaBio);
 
   const divider = el('div', 'about__divider');
