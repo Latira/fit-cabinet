@@ -5,7 +5,7 @@ import { createModal } from './modal';
 export function createExercisePicker(
     onSelect: (selectedExercises: Exercise[]) => void,
     currentSelection: Exercise[] = [],
-    customExercises: Exercise[] = [] // <-- Массив для сохранения кастомных упражнений
+    customExercises: Exercise[] = []
 ): HTMLElement {
     const doneBtn = createBtn('exercise-picker__done-btn', 'Done');
 
@@ -14,7 +14,6 @@ export function createExercisePicker(
         footerContent: doneBtn,
     });
 
-    // --- Блок создания своего упражнения ---
     const createSection = el('div', 'exercise-picker__create-section');
     const createInput = el('input', 'exercise-picker__create-input');
     createInput.type = 'text';
@@ -24,7 +23,6 @@ export function createExercisePicker(
     
     createSection.append(createInput, addCustomBtn);
 
-    // --- Блок поиска ---
     const searchInput = el('input', 'exercise-picker__search');
     searchInput.type = 'text';
     searchInput.placeholder = 'Search exercises...';
@@ -36,11 +34,9 @@ export function createExercisePicker(
     let allExercises: Exercise[] = [];
     let selected: Set<string> = new Set(currentSelection.map(ex => ex.name));
 
-    // Загрузка данных с сервера
     listContainer.append(el('p', 'exercise-picker__status', 'Loading...'));
     getExercises({ limit: '100' }).then((res) => {
         const serverExercises = Array.isArray(res) ? res : res.data || [];
-        // Объединяем кастомные упражнения с теми, что пришли с сервера
         allExercises = [...customExercises, ...serverExercises];
         renderList();
     }).catch(() => {
@@ -49,7 +45,7 @@ export function createExercisePicker(
 
     const renderList = (query: string = '') => {
         listContainer.replaceChildren();
-        const filtered = allExercises.filter(ex => 
+        const filtered = allExercises.filter(ex =>
             ex.name.toLowerCase().includes(query.toLowerCase())
         );
 
@@ -84,16 +80,13 @@ export function createExercisePicker(
         });
     };
 
-    // Логика создания нового упражнения
     addCustomBtn.addEventListener('click', () => {
         const newExName = createInput.value.trim();
         if (!newExName) return;
 
-        // Проверяем, нет ли уже такого упражнения
         const exists = allExercises.some(ex => ex.name.toLowerCase() === newExName.toLowerCase());
         
         if (!exists) {
-            // Создаем объект нового упражнения
             const newExercise: Exercise = {
                 id: `custom-${Date.now()}`,
                 name: newExName,
@@ -106,18 +99,14 @@ export function createExercisePicker(
                 level: 'beginner'
             };
             
-            // Сохраняем в переданный массив, чтобы оно не исчезло при повторном открытии модалки
             customExercises.push(newExercise);
-            // Добавляем в текущий список для отображения
             allExercises.unshift(newExercise);
         }
 
-        // Автоматически выделяем его галочкой
         selected.add(newExName);
         
-        // Очищаем поле ввода и обновляем список
         createInput.value = '';
-        searchInput.value = ''; 
+        searchInput.value = '';
         renderList();
     });
 
