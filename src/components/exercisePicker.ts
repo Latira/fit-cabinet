@@ -13,6 +13,7 @@ export function createExercisePicker(
     title: 'Select Exercises',
     footerContent: doneBtn,
   });
+  modal.classList.add('exercise-picker-modal');
 
   const createSection = el('div', 'exercise-picker__create-section');
   const createInput = el('input', 'exercise-picker__create-input');

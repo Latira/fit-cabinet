@@ -1,6 +1,28 @@
 @use '../../base/variables' as *;
 @use '../../base/mixins' as *;
 
+.workout-timer-modal {
+  > div,
+  .modal__window,
+  .modal__dialog,
+  .modal__content,
+  .modal__container,
+  .modal__box {
+    width: 100% !important;
+    max-width: 900px !important;
+  }
+
+  h2,
+  h3,
+  .modal__title {
+    white-space: nowrap;
+
+    @media (max-width: 900px) {
+      white-space: normal;
+    }
+  }
+}
+
 .workout-timer {
   @extend %flex-column;
   align-items: center;

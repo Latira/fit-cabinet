@@ -6,6 +6,7 @@ export function openChangeTodayModal(allWorkouts: SavedWorkout[], onSelected: ()
   const { modal, contentArea } = createModal({
     title: 'Select workout for today',
   });
+  modal.classList.add('workout-select-modal');
 
   const list = el('div', 'workout-select-list');
 

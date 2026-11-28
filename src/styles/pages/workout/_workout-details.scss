@@ -1,6 +1,18 @@
 @use '../../base/variables' as *;
 @use '../../base/mixins' as *;
 
+.workout-details-modal {
+  > div,
+  .modal__window,
+  .modal__dialog,
+  .modal__content,
+  .modal__container,
+  .modal__box {
+    width: 100% !important;
+    max-width: 900px !important;
+  }
+}
+
 .workout-details {
   @extend %flex-column;
   align-items: stretch;

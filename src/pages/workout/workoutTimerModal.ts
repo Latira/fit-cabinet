@@ -61,6 +61,7 @@ export function openWorkoutTimer(workout: SavedWorkout): void {
     title: `Workout: ${workout.name}`,
     onClose: stopTimer,
   });
+  modal.classList.add('workout-timer-modal');
 
   const startTimer = () => {
     stopTimer();

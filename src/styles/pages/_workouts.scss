@@ -19,10 +19,9 @@
 
 .routine,
 .workout-today {
-  width: 90%;
-  max-width: 600px;
+  width: 100%;
   margin: 0 auto;
-  padding: 30px 20px;
+  padding: 30px 50px;
   height: auto;
   background-color: var(--color-surface__secondary);
   border-radius: 20px;
@@ -37,7 +36,7 @@
 .routine__button,
 .workout-today__button {
   @include base-btn;
-  padding: 0 32px;
+  padding: 0 30px;
   width: 100%;
   max-width: 300px;
   margin-top: 20px;

@@ -19,6 +19,7 @@ export function openWorkoutDetailsModal(
     title: workout.name,
     footerContent: footerActions,
   });
+  modal.classList.add('workout-details-modal');
 
   const details = el('div', 'workout-details');
   const duration = el('p', 'workout-details__duration', `Duration: ${workout.duration} min`);

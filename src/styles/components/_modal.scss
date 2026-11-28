@@ -22,11 +22,11 @@ body:has(.modal-overlay) {
   background: var(--color-bg);
   color: var(--color-text);
   border: 1px solid var(--color-border__theme);
-  width: 100%;
-  max-width: 560px;
-  max-height: calc(100vh - 48px) !important;
+  width: 100% !important;
+  max-width: 900px !important;
+  max-height: calc(100vh - 30px) !important;
   height: auto !important;
-  border-radius: 24px;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   overflow: hidden !important;
@@ -38,6 +38,7 @@ body:has(.modal-overlay) {
 
   &__header {
     @include flex(space-between, center);
+    gap: 16px;
     flex-shrink: 0;
     padding: 20px 24px 14px;
     border-bottom: 1px solid var(--color-border__theme);
@@ -47,10 +48,16 @@ body:has(.modal-overlay) {
     @include font(22px, 1.2, 700);
     margin: 0;
     color: var(--color-text);
+    flex: 1;
+    min-width: 0;
+    max-width: none !important;
+    width: auto !important;
+    text-align: left !important;
   }
 
   &__close {
     @include flex(center, center);
+    flex-shrink: 0;
     width: 36px;
     height: 36px;
     border-radius: 50%;

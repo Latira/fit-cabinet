@@ -1,7 +1,22 @@
 @use '../base/variables' as *;
 @use '../base/mixins' as *;
 
+.exercise-picker-modal {
+  > div,
+  .modal__window,
+  .modal__dialog,
+  .modal__content,
+  .modal__container,
+  .modal__box {
+    width: 100% !important;
+    max-width: 900px !important;
+  }
+}
+
 .exercise-picker {
+  width: 100%;
+  overflow-x: hidden;
+
   &__create-section {
     display: flex;
     gap: 10px;
@@ -12,6 +27,7 @@
 
   &__create-input {
     flex: 1;
+    min-width: 0;
     padding: 10px 14px;
     border: 1px solid var(--color-input__border);
     border-radius: 8px;
@@ -94,7 +110,9 @@
 
   &__list {
     flex: 1;
+    max-height: 400px;
     overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -124,6 +142,7 @@
 
   &__name {
     flex: 1;
+    min-width: 0;
     font-size: 15px;
     font-weight: 500;
     color: var(--color-text);
