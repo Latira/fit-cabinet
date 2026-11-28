@@ -5,17 +5,6 @@ import { createCalendar } from '../components/calendar';
 
 export function createFoodDiary(): HTMLElement {
 
-    // const currentMeals: IMeal[] = [
-    //     {
-    //         id: '1',
-    //         type: 'BREAKFAST',
-    //         description: 'Oatmeal',
-    //         calories: 420,
-    //         protein: 15,
-    //         fat: 12,
-    //         carbs: 63
-    //     }
-    // ];
     const DAILY_LIMIT = 2220;
     let activeDate = new Date();
     const formatDateKey = (date: Date): string => {
@@ -93,18 +82,21 @@ export function createFoodDiary(): HTMLElement {
                 const mealIcon = el('div', 'meal-card__icon'); 
                 const mealsCup = createSvgIcon(mealsCupSvg, 'meal-card__svg');
                 mealIcon.append(mealsCup);
-            
                 const mealInfo = el('div', 'meal-card__info');
-                const mealType = el('h4', 'meal-card__type', meal.type);
-                const mealDesc = el('p', 'meal-card__description', meal.description);
-                mealInfo.append(mealType, mealDesc);
-            
+                mealInfo.append(el('h4', 'meal-card__type', meal.type), el('p', 'meal-card__description', meal.description));
                 const mealCalories = el('div', 'meal-card__calories', `${meal.calories} KCAL`);
-                mealCard.append(mealIcon, mealInfo, mealCalories);
+                const deleteBtn = el('button', 'meal-card__delete-btn', 'X');
+                mealCard.append(mealIcon, mealInfo, mealCalories, deleteBtn);
                 mealsList.appendChild(mealCard);
+                deleteBtn.addEventListener('click', () => {
+                    const meals = getMealsForDate(activeDate);
+                    const updatedMeals = meals.filter(m => m.id !== meal.id);
+                    saveMealsForDate(activeDate, updatedMeals);
+                    renderContent();
+                });
             });
         }
-        foodDiary.append(nutritionWidget, mealsList);
+        foodDiary.append(nutritionWidget, mealsList); 
     }
 
     const title = el('h1', 'food-diary__title', 'food diary');   
@@ -119,9 +111,7 @@ export function createFoodDiary(): HTMLElement {
         }
     });
     controlsRow.append(addMeal, calendarBlock);
-    
     foodDiary.append(title, controlsRow);
-
     addMealBtn.addEventListener('click', () => {
         openAddMealModal({
             onAdd: (newMeal) => {
@@ -132,8 +122,6 @@ export function createFoodDiary(): HTMLElement {
             }
         });
     });
-
     renderContent();
-
     return foodDiary;
 }

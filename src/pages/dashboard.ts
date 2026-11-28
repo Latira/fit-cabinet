@@ -1,5 +1,6 @@
 import { el } from '../utils/tags';
 import { navigateTo } from '../utils/router';
+import { createProgressCircle } from './foodDiary/progressCircle';
 
 
 export function createDashboard(): HTMLElement {
@@ -26,12 +27,8 @@ export function createDashboard(): HTMLElement {
     const foodDiaryLink = el('button', 'dashboard__show-more', 'Show more');
     const foodDiaryHeading = el('h2', 'dashboard__card-heading', 'food diary');
     const foodDiaryProgress = el('div', 'food-diary__progress');
-    const foodDiaryProgressCircle = el('div', 'food-diary__circle');
-    const foodDiaryProgressText = el('div', 'food-diary__progress-text');
-    const foodDiaryCalories = el('span', 'food-diary__calories', '555/2220');
-    const foodDiaryLabel = el('span', 'food-diary__label', 'logged');
-    foodDiaryProgressText.append(foodDiaryCalories, foodDiaryLabel);
-    foodDiaryProgress.append(foodDiaryProgressCircle, foodDiaryProgressText);
+    const foodDiaryProgressCircle = createProgressCircle(); 
+    foodDiaryProgress.append(foodDiaryProgressCircle);
     const foodDiaryBtn = el('button', 'dashboard__action-btn', 'Add meal');
     foodDiary.append(foodDiaryLink, foodDiaryHeading, foodDiaryProgress, foodDiaryBtn);
     bindNavigation(foodDiaryLink, '/food-diary');
