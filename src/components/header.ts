@@ -27,6 +27,7 @@ export function createHeader(): HTMLElement {
     { name: 'Dashboard', path: '/dashboard' },
     { name: 'Food Diary', path: '/food-diary' },
     { name: 'Workouts', path: '/workouts' },
+    { name: 'Library Exercise', path: '/exercises' },
     { name: 'Notes', path: '/notes' },
     { name: 'Gearwishlist', path: '/wishlist' },
     { name: 'Settings', path: '/settings' },

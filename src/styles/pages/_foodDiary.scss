@@ -165,6 +165,7 @@
 
     .meal-card {
       @include flex(space-between, center);
+      gap: 15px;
       width: 100%;
       padding: 16px 24px;
       border-radius: 12px;
@@ -172,7 +173,11 @@
       box-sizing: border-box;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
 
-      .meal-card__icon {
+      .meal-card:hover .meal-card__delete-btn {
+        opacity: 0.6;
+      }
+
+      &__icon {
         @include flex(center, center);
         width: 100px;
         height: 100px;
@@ -188,7 +193,7 @@
         }
       }
 
-      .meal-card__info {
+      &__info {
         flex: 1;
 
         .meal-card__type {
@@ -204,10 +209,32 @@
         }
       }
 
-      .meal-card__calories {
+      &__calories {
         @include font(16px, 1.1, 700);
         color: var(--color-black);
         white-space: nowrap;
+      }
+
+      .meal-card__delete-btn {
+        background: none;
+        border: none;
+        font-size: 20px;
+        font-weight: 300;
+        color: var(--color-grey);
+        cursor: pointer;
+        padding: 0 5px;
+        margin-left: auto;
+        opacity: 1;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+      }
+
+      .meal-card__delete-btn:hover {
+        color: var(--color-line);
+        transform: scale(1.15);
+      }
+
+      .meal-card__delete-btn:active {
+        transform: scale(0.9);
       }
     }
   }
