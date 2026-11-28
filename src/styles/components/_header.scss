@@ -9,139 +9,145 @@ body.scroll-lock {
 }
 
 header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    width: 100%;
-    border-bottom: 1px solid var(--color-border__theme);
-    background-color: var(--color-bg__main);
-    background-attachment: fixed; 
-    backdrop-filter: blur(30px); 
-    -webkit-backdrop-filter: blur(30px); 
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  border-bottom: 1px solid var(--color-border__theme);
+  background-color: var(--color-bg__main);
+  background-attachment: fixed;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
 }
 
 .header__wrapper {
-    max-width: 1220px;
-    margin: 0 auto;
-    @extend %flex-row;
-    height: 120px;
+  max-width: 1220px;
+  margin: 0 auto;
+  @extend %flex-row;
+  height: 120px;
 }
 
 .logo {
-    @extend %flex-row;
-    width: 340px;
-    height: 115px;
-    padding: 18px;
-    border-radius: 45px;
-    background-color: var--(color-white-bg);
-    box-shadow: 2px 4px 16px 0px rgba(180, 180, 180, 0.8);
-    transition: opacity 0.2s ease-in-out;
-    &:hover {
-        opacity: 0.75;
-    }
+  @extend %flex-row;
+  width: 340px;
+  height: 115px;
+  padding: 18px;
+  border-radius: 45px;
+  background-color: var--(color-white-bg);
+  box-shadow: 2px 4px 16px 0px rgba(180, 180, 180, 0.8);
+  transition: opacity 0.2s ease-in-out;
+  &:hover {
+    opacity: 0.75;
+  }
 }
 
 .logo__img {
-    width: 85px;
-    height: 85px;
-    border-radius: 45px;
-    background-image: url('../../img/icon-sneakers.jpg');
-    background-size: cover;
+  width: 85px;
+  height: 85px;
+  border-radius: 45px;
+  background-image: url('../../img/icon-sneakers.jpg');
+  background-size: cover;
 }
 
 .logo__title {
-    @extend %font-logo;
-    text-transform: uppercase;
-    font-size: 32px;
-    letter-spacing: 0.12em;
+  @extend %font-logo;
+  text-transform: uppercase;
+  font-size: 32px;
+  letter-spacing: 0.12em;
 }
 
 .menu {
-    @extend %flex-row;
-    flex-wrap: wrap;
-    gap: 28px;
-    position: relative;
-    width: 500px;
+  @extend %flex-row;
+  flex-wrap: wrap;
+  gap: 28px;
+  position: relative;
+  width: 500px;
+  height: 60px;
+  padding: 0px 24px;
+  margin-left: auto;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  background: transparent;
+  overflow: hidden;
+  align-self: flex-start;
+  margin-top: 30px;
+  transition:
+    height 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    background-color 0.3s ease;
+  cursor: pointer;
+
+  &.is-open {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    background: var(--color-bg__main);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    justify-content: space-between;
+    align-content: flex-start;
+    padding: 5vh 35vw;
+    margin: 0;
+  }
+
+  &:hover {
+    .menu__burger {
+      background-color: var(--color-white-bg);
+    }
+    .menu__text {
+      text-shadow: 0 0 8px rgba(0, 85, 255, 0.4);
+    }
+  }
+
+  &__text {
+    @extend %font-p;
+    color: var(--color-black);
+    transition:
+      text-shadow 0.3s ease,
+      color 0.3s ease;
+  }
+
+  &__burger {
+    @extend %flex-column;
+    justify-content: center;
+    gap: 7px;
+    width: 60px;
     height: 60px;
-    padding: 0px 24px;
-    margin-left: auto;
-    justify-content: flex-end;
-    box-sizing: border-box;
-    background: transparent;
-    overflow: hidden;
-    align-self: flex-start;
-    margin-top: 30px;
-    transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
-    cursor: pointer;
+    background-color: transparent;
+    border-radius: 50%;
+    transition: background-color 0.5s ease;
+  }
 
-    &.is-open {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: 9999;
-        background: var(--color-bg__main);
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-        justify-content: space-between;
-        align-content: flex-start;
-        padding: 5vh 35vw;
-        margin: 0;
-    }
+  &__line {
+    display: block;
+    width: 40px;
+    height: 4px;
+    background-color: var(--color-black);
+    border-radius: 2px;
+    transition:
+      transform 0.5s ease,
+      opacity 0.3s ease;
+    transform-origin: center;
+  }
 
-    &:hover {
-        .menu__burger {
-            background-color: var(--color-white-bg);
-        }
-        .menu__text {
-            text-shadow: 0 0 8px rgba(0, 85, 255, 0.4);
-        }
+  &__burger.is-active {
+    gap: 0;
+    .menu__line:nth-child(1) {
+      transform: translateY(4px) rotate(45deg);
     }
-
-    &__text {
-        @extend %font-p;
-        color: var(--color-black);
-        transition: text-shadow 0.3s ease, color 0.3s ease;
+    .menu__line:nth-child(2) {
+      opacity: 0;
     }
-
-    &__burger {
-        @extend %flex-column;
-        justify-content: center;
-        gap: 7px;
-        width: 60px;
-        height: 60px; 
-        background-color: transparent;
-        border-radius: 50%;
-        transition: background-color 0.5s ease;
+    .menu__line:nth-child(3) {
+      transform: translateY(-4px) rotate(-45deg);
     }
-
-    &__line {
-        display: block;
-        width: 40px;
-        height: 4px;
-        background-color: var(--color-black);
-        border-radius: 2px;
-        transition: transform 0.5s ease, opacity 0.3s ease;
-        transform-origin: center; 
-    }
-    
-    &__burger.is-active {
-        gap: 0; 
-        .menu__line:nth-child(1) {
-            transform: translateY(4px) rotate(45deg);
-        }
-        .menu__line:nth-child(2) {
-            opacity: 0;
-        }
-        .menu__line:nth-child(3) {
-            transform: translateY(-4px) rotate(-45deg);
-        }
-    }
+  }
 }
 
 .menu__text {
-    @include font(24px, 1.25, 600);
-    text-transform: uppercase;
+  @include font(24px, 1.25, 600);
+  text-transform: uppercase;
 }
 
 .burger-menu {
@@ -149,12 +155,16 @@ header {
   margin-top: 40px;
   opacity: 0;
   transform: translateY(-10px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 
   &.is-open {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
+    transition:
+      opacity 0.4s ease 0.15s,
+      transform 0.4s ease 0.15s;
   }
 
   &__list {
@@ -186,7 +196,9 @@ header {
     padding: 14px 0;
     @extend %font-h2;
     color: var(--color-black);
-    transition: background-color 0.5s ease, color 0.5s ease;
+    transition:
+      background-color 0.5s ease,
+      color 0.5s ease;
   }
 
   &__item {
@@ -199,8 +211,6 @@ header {
     }
   }
 }
-
-
 
 // .menu {
 //   @extend %flex-row;
@@ -217,7 +227,7 @@ header {
 //   overflow: hidden;
 //   align-self: flex-start;
 //   margin-top: 30px;
-//   transition: background-color 0.3s ease; 
+//   transition: background-color 0.3s ease;
 //   cursor: pointer;
 //   z-index: 100; // Гарантируем, что меню будет поверх остального контента
 
@@ -230,13 +240,13 @@ header {
 //     height: 100vh;
 //     margin: 0;
 //     padding: 40px;
-    
+
 //     // Центрируем само бургер-меню по экрану
 //     display: flex;
 //     flex-direction: column;
-//     justify-content: center; 
+//     justify-content: center;
 //     align-items: center;
-    
+
 //     // Блюр фона и полупрозрачная подложка
 //     background: rgba(255, 255, 255, 0.2); // Подберите цвет под ваш дизайн (белый или темный полупрозрачный)
 //     backdrop-filter: blur(10px); // Эффект размытия заднего плана
@@ -269,7 +279,7 @@ header {
 //     background-color: transparent;
 //     border-radius: 50%;
 //     transition: background-color 0.5s ease;
-    
+
 //     // При открытом меню кнопку "Х" (закрыть) фиксируем в верхнем углу
 //     .menu.is-open & {
 //       position: absolute;
@@ -305,7 +315,7 @@ header {
 // .menu__text {
 //   @include font(24px, 1.25, 600);
 //   text-transform: uppercase;
-  
+
 //   // Скрываем слово MENU при открытом состоянии, чтобы остался только крестик
 //   .menu.is-open & {
 //     display: none;
@@ -314,7 +324,7 @@ header {
 
 // .burger-menu {
 //   // Задаем фиксированную максимальную ширину для списка ссылок по центру
-//   max-width: 400px; 
+//   max-width: 400px;
 //   width: 100%;
 //   margin-top: 0; // Сбрасываем верхний отступ
 //   opacity: 0;
@@ -351,7 +361,7 @@ header {
 //         color: var(--color-btn__text);
 //       }
 //     }
-    
+
 //     &:hover {
 //       background-color: var(--color-dark-bg);
 //       .burger-menu__link {
@@ -368,29 +378,6 @@ header {
 //     transition: background-color 0.5s ease, color 0.5s ease;
 //   }
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // .menu {
 //     // @extend %flex-row;
@@ -441,15 +428,15 @@ header {
 //         align-items: center;
 //         gap: 9px;
 //         width: 50px;
-//         height: 24px; 
+//         height: 24px;
 //         background-color: var--(color-white-bg);
 //         border-radius: 50%;
 //         transition: background-color 0.5s ease;
-//         margin-left: auto; 
+//         margin-left: auto;
 
 //         /* Когда меню открыто, этот отступ гарантирует, что крестик встанет строго справа */
 //         .menu.is-open & {
-//             margin-left: auto; 
+//             margin-left: auto;
 //         }
 //     }
 
@@ -460,10 +447,10 @@ header {
 //         background-color: var(--color-black);
 //         border-radius: 2px;
 //         transition: transform 0.5s ease, opacity 0.3s ease;
-//         transform-origin: center; 
+//         transform-origin: center;
 //     }
 //     &__burger.is-active {
-//         gap: 0; 
+//         gap: 0;
 //         .menu__line:nth-child(1) {
 //             transform: translateY(3px) rotate(45deg);
 //         }
@@ -541,8 +528,6 @@ header {
 //   }
 // }
 
-
-
 // .burger-menu {
 //     position: absolute;
 //     top: 100%;
@@ -553,7 +538,7 @@ header {
 //     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 //     border-radius: 12px;
 //     z-index: 99;
-//     display: none;    
+//     display: none;
 //     &.is-open {
 //         display: flex;
 //         justify-content: center;

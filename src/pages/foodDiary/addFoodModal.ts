@@ -10,7 +10,7 @@ export function openAddMealModal({ onAdd }: AddMealModalOptions): void {
   const form = el('form', 'modal-form');
 
   const typeSelect = el('select', 'modal-select') as HTMLSelectElement;
-  ['Breakfast', 'Lunch', 'Dinner', 'Snack'].forEach(type => {
+  ['Breakfast', 'Lunch', 'Dinner', 'Snack'].forEach((type) => {
     const option = el('option', '', type) as HTMLOptionElement;
     option.value = type.toUpperCase();
     typeSelect.appendChild(option);
@@ -52,7 +52,7 @@ export function openAddMealModal({ onAdd }: AddMealModalOptions): void {
 
   const { modal, contentArea } = createBaseModal({
     title: 'ADD NEW MEAL',
-    footerContent: actionsRow
+    footerContent: actionsRow,
   });
 
   contentArea.append(form);
@@ -76,7 +76,7 @@ export function openAddMealModal({ onAdd }: AddMealModalOptions): void {
     const actualFat = (fPer100g * weightEaten) / 100;
     const actualCarbs = (cPer100g * weightEaten) / 100;
 
-    const calculatedCalories = Math.round((actualProtein * 4) + (actualFat * 9) + (actualCarbs * 4));
+    const calculatedCalories = Math.round(actualProtein * 4 + actualFat * 9 + actualCarbs * 4);
 
     const newMeal: IMeal = {
       id: crypto.randomUUID(),
@@ -85,7 +85,7 @@ export function openAddMealModal({ onAdd }: AddMealModalOptions): void {
       calories: calculatedCalories,
       protein: Math.round(actualProtein),
       fat: Math.round(actualFat),
-      carbs: Math.round(actualCarbs)
+      carbs: Math.round(actualCarbs),
     };
 
     onAdd(newMeal);

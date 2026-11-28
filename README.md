@@ -10,7 +10,7 @@
 
 ## Skills
 
-```HTML5/CSS3``` | ```TypeScript``` | ```Eslint``` | ```Prettier``` | ```Vite``` | ```Vitest``` | ```Husky```
+`HTML5/CSS3` | `TypeScript` | `Eslint` | `Prettier` | `Vite` | `Vitest` | `Husky`
 
 ---
 

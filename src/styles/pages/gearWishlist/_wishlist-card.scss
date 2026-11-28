@@ -2,112 +2,115 @@
 @use '../../base/mixins' as *;
 
 .gear-wish-list {
-    &__card-item {
-        @extend %flex-column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        text-align: left;
-        min-height: 220px;
-        padding: 20px;
-        border-radius: 20px;
-        background-color: var(--color-surface__secondary);
-        border: 1px solid var(--color-border__theme);
-        transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  &__card-item {
+    @extend %flex-column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+    min-height: 220px;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: var(--color-surface__secondary);
+    border: 1px solid var(--color-border__theme);
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
 
-        &:hover {
-            transform: translateY(-3px);
-            border-color: var(--color-input__border-active);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-        }
+    &:hover {
+      transform: translateY(-3px);
+      border-color: var(--color-input__border-active);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     }
+  }
 
-    &__card-img-wrap {
-        width: 100%;
-        height: 150px;
-        border-radius: 14px;
-        overflow: hidden;
-        margin-bottom: 14px;
-        background-color: var(--color-input__bg);
+  &__card-img-wrap {
+    width: 100%;
+    height: 150px;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 14px;
+    background-color: var(--color-input__bg);
+  }
+
+  &__card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__card-title {
+    @include font(18px, 1.3, 600);
+    color: var(--color-text);
+    text-align: left;
+    word-break: break-word;
+    margin: 0 0 10px;
+  }
+
+  &__card-meta {
+    @extend %flex-column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 16px;
+    width: 100%;
+  }
+
+  &__card-price {
+    @include font(14px, 1.2, 600);
+    padding: 4px 12px;
+    border-radius: 20px;
+    background-color: var(--color-faq-badge__bg);
+    color: var(--color-faq-badge__text);
+  }
+
+  &__card-link {
+    @include font(14px, 1.2, 600);
+    color: var(--color-input__border-active);
+    text-decoration: underline;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.8;
     }
+  }
 
-    &__card-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+  &__card-actions {
+    @include flex(center, center);
+    gap: 10px;
+    width: 100%;
+    margin-top: auto;
+  }
+
+  &__change-btn {
+    @include font(14px, 1.2, 600);
+    padding: 8px 18px;
+    border-radius: 20px;
+    background-color: transparent;
+    color: var(--color-input__border-active);
+    border: 1px solid var(--color-input__border-active);
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: var(--color-btn__bg);
+      color: var(--color-btn__text);
+      border-color: var(--color-btn__bg);
     }
+  }
 
-    &__card-title {
-        @include font(18px, 1.3, 600);
-        color: var(--color-text);
-        text-align: left;
-        word-break: break-word;
-        margin: 0 0 10px;
+  &__delete-btn {
+    @include font(14px, 1.2, 600);
+    padding: 8px 18px;
+    border-radius: 20px;
+    background-color: transparent;
+    color: #e53935;
+    border: 1px solid #e53935;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: #e53935;
+      color: #ffffff;
     }
-
-    &__card-meta {
-        @extend %flex-column;
-        align-items: flex-start;
-        gap: 8px;
-        margin-bottom: 16px;
-        width: 100%;
-    }
-
-    &__card-price {
-        @include font(14px, 1.2, 600);
-        padding: 4px 12px;
-        border-radius: 20px;
-        background-color: var(--color-faq-badge__bg);
-        color: var(--color-faq-badge__text);
-    }
-
-    &__card-link {
-        @include font(14px, 1.2, 600);
-        color: var(--color-input__border-active);
-        text-decoration: underline;
-        transition: opacity 0.2s ease;
-
-        &:hover {
-            opacity: 0.8;
-        }
-    }
-
-    &__card-actions {
-        @include flex(center, center);
-        gap: 10px;
-        width: 100%;
-        margin-top: auto;
-    }
-
-    &__change-btn {
-        @include font(14px, 1.2, 600);
-        padding: 8px 18px;
-        border-radius: 20px;
-        background-color: transparent;
-        color: var(--color-input__border-active);
-        border: 1px solid var(--color-input__border-active);
-        cursor: pointer;
-        transition: all 0.2s ease;
-
-        &:hover {
-            background-color: var(--color-btn__bg);
-            color: var(--color-btn__text);
-            border-color: var(--color-btn__bg);
-        }
-    }
-
-    &__delete-btn {
-        @include font(14px, 1.2, 600);
-        padding: 8px 18px;
-        border-radius: 20px;
-        background-color: transparent;
-        color: #e53935;
-        border: 1px solid #e53935;
-        cursor: pointer;
-        transition: all 0.2s ease;
-
-        &:hover {
-            background-color: #e53935;
-            color: #ffffff;
-        }
-    }
+  }
 }

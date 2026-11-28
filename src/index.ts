@@ -26,9 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (link && link.getAttribute('href')?.startsWith('/')) {
       event.preventDefault();
-      
+
       const path = link.getAttribute('href')!;
-      
+
       window.history.pushState({}, '', path);
       renderRoute(pageContainer);
     }

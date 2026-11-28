@@ -7,16 +7,16 @@
 @use 'gearWishlist/wishlist-modal';
 
 .gear-wish-list {
-    @extend %flex-column;
-    align-items: stretch;
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 32px 20px;
+  @extend %flex-column;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 20px;
 
-    &__title {
-        @extend %font-h1;
-        color: var(--color-text);
-        margin-bottom: 28px;
-    }
+  &__title {
+    @extend %font-h1;
+    color: var(--color-text);
+    margin-bottom: 28px;
+  }
 }

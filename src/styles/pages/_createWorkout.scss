@@ -2,263 +2,265 @@
 @use '../base/mixins' as *;
 
 .create-workout-page {
+  @extend %flex-column;
+  align-items: center;
+  padding: 40px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+
+  &__title {
+    @extend %font-h1;
+    margin-bottom: 30px;
+    text-align: center;
+    color: var(--color-text);
+  }
+
+  &__form {
     @extend %flex-column;
-    align-items: center;
-    padding: 40px 20px;
-    max-width: 600px;
-    margin: 0 auto;
+    align-items: stretch;
     width: 100%;
-    box-sizing: border-box;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 28px 24px;
+    border-radius: 20px;
+    background-color: var(--color-surface__secondary);
+    border: 1px solid var(--color-border__theme);
+  }
 
-    &__title {
-        @extend %font-h1;
-        margin-bottom: 30px;
-        text-align: center;
+  &__label {
+    @include font(15px, 1.2, 600);
+    color: var(--color-label);
+    margin-bottom: -8px;
+    display: block;
+  }
+
+  &__input {
+    @include font(16px, 1.3, 400);
+    width: 100%;
+    padding: 12px 18px;
+    border: 1px solid var(--color-input__border);
+    border-radius: 16px;
+    background-color: var(--color-input__bg);
+    color: var(--color-text);
+    outline: none;
+    transition:
+      background-color 0.25s ease,
+      border-color 0.25s ease,
+      color 0.25s ease,
+      box-shadow 0.25s ease;
+
+    &::placeholder {
+      color: var(--color-label);
+      opacity: 0.75;
+    }
+
+    &:hover {
+      background-color: var(--color-input__bg-hover);
+      border-color: var(--color-input__border-hover);
+      color: var(--color-text);
+
+      &::placeholder {
         color: var(--color-text);
+        opacity: 0.7;
+      }
     }
 
-    &__form {
-        @extend %flex-column;
-        align-items: stretch;
-        width: 100%;
-        gap: 16px;
-        margin-bottom: 24px;
-        padding: 28px 24px;
-        border-radius: 20px;
-        background-color: var(--color-surface__secondary);
-        border: 1px solid var(--color-border__theme);
-    }
+    &:focus {
+      background-color: var(--color-input__bg-active);
+      border-color: var(--color-input__border-active);
+      color: var(--color-text);
+      box-shadow: 0 0 0 3px var(--color-input__shadow-active);
 
-    &__label {
-        @include font(15px, 1.2, 600);
-        color: var(--color-label);
-        margin-bottom: -8px;
-        display: block;
-    }
-
-    &__input {
-        @include font(16px, 1.3, 400);
-        width: 100%;
-        padding: 12px 18px;
-        border: 1px solid var(--color-input__border);
-        border-radius: 16px;
-        background-color: var(--color-input__bg);
+      &::placeholder {
         color: var(--color-text);
-        outline: none;
-        transition:
-            background-color 0.25s ease,
-            border-color 0.25s ease,
-            color 0.25s ease,
-            box-shadow 0.25s ease;
-
-        &::placeholder {
-            color: var(--color-label);
-            opacity: 0.75;
-        }
-
-        &:hover {
-            background-color: var(--color-input__bg-hover);
-            border-color: var(--color-input__border-hover);
-            color: var(--color-text);
-
-            &::placeholder {
-                color: var(--color-text);
-                opacity: 0.7;
-            }
-        }
-
-        &:focus {
-            background-color: var(--color-input__bg-active);
-            border-color: var(--color-input__border-active);
-            color: var(--color-text);
-            box-shadow: 0 0 0 3px var(--color-input__shadow-active);
-
-            &::placeholder {
-                color: var(--color-text);
-                opacity: 0.65;
-            }
-        }
-
-        &[type='number'] {
-            appearance: none;
-            -moz-appearance: textfield;
-            &::-webkit-outer-spin-button,
-            &::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
-            }
-        }
+        opacity: 0.65;
+      }
     }
 
-    &__exercises {
-        @extend %flex-column;
-        align-items: stretch;
-        gap: 14px;
-        margin: 10px 0;
-        padding: 18px;
-        border: 1px dashed var(--color-border__theme);
-        border-radius: 16px;
-        background-color: var(--color-input__bg);
-    }
-
-    &__exercises-title {
-        @include font(18px, 1.2, 600);
+    &[type='number'] {
+      appearance: none;
+      -moz-appearance: textfield;
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
         margin: 0;
-        color: var(--color-text);
-        text-align: center;
+      }
+    }
+  }
+
+  &__exercises {
+    @extend %flex-column;
+    align-items: stretch;
+    gap: 14px;
+    margin: 10px 0;
+    padding: 18px;
+    border: 1px dashed var(--color-border__theme);
+    border-radius: 16px;
+    background-color: var(--color-input__bg);
+  }
+
+  &__exercises-title {
+    @include font(18px, 1.2, 600);
+    margin: 0;
+    color: var(--color-text);
+    text-align: center;
+  }
+
+  &__exercises-list {
+    @extend %flex-column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  &__empty-ex {
+    @include font(14px, 1.4, 400);
+    color: var(--color-label);
+    font-style: italic;
+    margin: 0;
+    text-align: center;
+  }
+
+  &__ex-item {
+    @extend %flex-column;
+    align-items: stretch;
+    gap: 12px;
+    background-color: var(--color-surface__secondary);
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1px solid var(--color-border__theme);
+  }
+
+  &__ex-header {
+    @include flex(space-between, center);
+    border-bottom: 1px solid var(--color-border__theme);
+    padding-bottom: 8px;
+  }
+
+  &__ex-name {
+    @include font(16px, 1.3, 600);
+    color: var(--color-text);
+  }
+
+  &__ex-remove {
+    @include flex(center, center);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: none;
+    border: none;
+    color: #e53935;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+
+    &:hover {
+      background-color: rgba(229, 57, 53, 0.12);
+      color: #c62828;
+    }
+  }
+
+  &__ex-settings {
+    @include flex(space-between, center);
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  &__ex-field {
+    @extend %flex-column;
+    align-items: stretch;
+    gap: 4px;
+    flex: 1;
+    min-width: 75px;
+  }
+
+  &__ex-label {
+    @include font(12px, 1.2, 500);
+    color: var(--color-label);
+    text-align: center;
+  }
+
+  &__ex-input {
+    @include font(15px, 1.2, 600);
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--color-input__border);
+    border-radius: 10px;
+    text-align: center;
+    background-color: var(--color-input__bg);
+    color: var(--color-text);
+    outline: none;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &:hover {
+      background-color: var(--color-input__bg-hover);
+      border-color: var(--color-input__border-hover);
+      color: var(--color-text);
     }
 
-    &__exercises-list {
-        @extend %flex-column;
-        align-items: stretch;
-        gap: 12px;
+    &:focus {
+      background-color: var(--color-input__bg-active);
+      border-color: var(--color-input__border-active);
+      color: var(--color-text);
+      box-shadow: 0 0 0 2px var(--color-input__shadow-active);
     }
 
-    &__empty-ex {
-        @include font(14px, 1.4, 400);
-        color: var(--color-label);
-        font-style: italic;
+    &[type='number'] {
+      appearance: none;
+      -moz-appearance: textfield;
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
         margin: 0;
-        text-align: center;
+      }
     }
+  }
 
-    &__ex-item {
-        @extend %flex-column;
-        align-items: stretch;
-        gap: 12px;
-        background-color: var(--color-surface__secondary);
-        padding: 14px 16px;
-        border-radius: 14px;
-        border: 1px solid var(--color-border__theme);
+  &__add-exercise-btn {
+    @include font(14px, 1.2, 600);
+    background: transparent;
+    border: 1px solid var(--color-input__border-active);
+    color: var(--color-input__border-active);
+    padding: 10px 22px;
+    border-radius: 20px;
+    cursor: pointer;
+    align-self: center;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: var(--color-btn__bg);
+      color: var(--color-btn__text);
+      border-color: var(--color-btn__bg);
     }
+  }
 
-    &__ex-header {
-        @include flex(space-between, center);
-        border-bottom: 1px solid var(--color-border__theme);
-        padding-bottom: 8px;
+  &__submit {
+    @include base-btn;
+    margin-top: 10px;
+    width: 100%;
+    height: 52px;
+  }
+
+  &__back {
+    @include font(14px, 1.2, 500);
+    background: none;
+    border: none;
+    color: var(--color-label);
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+    padding: 8px 16px;
+
+    &:hover {
+      color: var(--color-text);
     }
-
-    &__ex-name {
-        @include font(16px, 1.3, 600);
-        color: var(--color-text);
-    }
-
-    &__ex-remove {
-        @include flex(center, center);
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        background: none;
-        border: none;
-        color: #e53935;
-        font-size: 22px;
-        line-height: 1;
-        cursor: pointer;
-        transition: background-color 0.2s ease, color 0.2s ease;
-
-        &:hover {
-            background-color: rgba(229, 57, 53, 0.12);
-            color: #c62828;
-        }
-    }
-
-    &__ex-settings {
-        @include flex(space-between, center);
-        gap: 12px;
-        flex-wrap: wrap;
-    }
-
-    &__ex-field {
-        @extend %flex-column;
-        align-items: stretch;
-        gap: 4px;
-        flex: 1;
-        min-width: 75px;
-    }
-
-    &__ex-label {
-        @include font(12px, 1.2, 500);
-        color: var(--color-label);
-        text-align: center;
-    }
-
-    &__ex-input {
-        @include font(15px, 1.2, 600);
-        width: 100%;
-        padding: 8px 10px;
-        border: 1px solid var(--color-input__border);
-        border-radius: 10px;
-        text-align: center;
-        background-color: var(--color-input__bg);
-        color: var(--color-text);
-        outline: none;
-        transition:
-            background-color 0.2s ease,
-            border-color 0.2s ease,
-            color 0.2s ease,
-            box-shadow 0.2s ease;
-
-        &:hover {
-            background-color: var(--color-input__bg-hover);
-            border-color: var(--color-input__border-hover);
-            color: var(--color-text);
-        }
-
-        &:focus {
-            background-color: var(--color-input__bg-active);
-            border-color: var(--color-input__border-active);
-            color: var(--color-text);
-            box-shadow: 0 0 0 2px var(--color-input__shadow-active);
-        }
-
-        &[type='number'] {
-            appearance: none;
-            -moz-appearance: textfield;
-            &::-webkit-outer-spin-button,
-            &::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
-            }
-        }
-    }
-
-    &__add-exercise-btn {
-        @include font(14px, 1.2, 600);
-        background: transparent;
-        border: 1px solid var(--color-input__border-active);
-        color: var(--color-input__border-active);
-        padding: 10px 22px;
-        border-radius: 20px;
-        cursor: pointer;
-        align-self: center;
-        transition: all 0.2s ease;
-
-        &:hover {
-            background-color: var(--color-btn__bg);
-            color: var(--color-btn__text);
-            border-color: var(--color-btn__bg);
-        }
-    }
-
-    &__submit {
-        @include base-btn;
-        margin-top: 10px;
-        width: 100%;
-        height: 52px;
-    }
-
-    &__back {
-        @include font(14px, 1.2, 500);
-        background: none;
-        border: none;
-        color: var(--color-label);
-        cursor: pointer;
-        text-decoration: underline;
-        transition: color 0.2s ease;
-        padding: 8px 16px;
-
-        &:hover {
-            color: var(--color-text);
-        }
-    }
+  }
 }

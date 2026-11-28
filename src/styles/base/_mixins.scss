@@ -27,18 +27,18 @@
   cursor: pointer;
 }
 
-    // Placeholders
+// Placeholders
 %flex-row {
   @include flex;
 }
 
 %flex-column {
   @include flex;
-  flex-direction: column; 
+  flex-direction: column;
 }
 
 %font-logo {
-   @include font($font-h1-size, $font-h1-lh, 400, $font-logo); 
+  @include font($font-h1-size, $font-h1-lh, 400, $font-logo);
 }
 
 %font-p {

@@ -30,7 +30,7 @@
     align-items: center;
     min-height: 380px;
     padding: 15px 50px 50px;
-    box-sizing: border-box;   
+    box-sizing: border-box;
     background-color: var(--color-white-bg);
     border-radius: 20px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.02);
@@ -43,12 +43,12 @@
   }
 
   &__show-more {
-    position: static; 
+    position: static;
     align-self: flex-start;
-    margin-bottom: 8px;    
+    margin-bottom: 8px;
     @include font();
     color: var(--color-white);
-    background: var(--color-accent-bg);    
+    background: var(--color-accent-bg);
     border: none;
     padding: 7px 14px;
     border-radius: 20px;
@@ -83,8 +83,9 @@
     border: 10px solid var(--color-input__border);
     border-radius: 50%;
     box-sizing: border-box;
-    border-color: var(--color-light-grey) var(--color-accent) var(--color-light-grey) var(--color-light-grey);
-    transform: rotate(-45deg); 
+    border-color: var(--color-light-grey) var(--color-accent) var(--color-light-grey)
+      var(--color-light-grey);
+    transform: rotate(-45deg);
   }
 
   &__progress-text {
@@ -137,7 +138,7 @@
     }
 
     .workouts__th-name {
-        padding: 10px 100px;
+      padding: 10px 100px;
     }
 
     td {
@@ -147,7 +148,7 @@
       text-align: center;
       border-bottom: 1px solid var(--color-black);
     }
-    
+
     tbody {
       cursor: pointer;
       tr:hover {
@@ -179,7 +180,7 @@
     &__complete-btn {
       @include font();
       padding: 6px 16px;
-      border-radius: 20px;      
+      border-radius: 20px;
       background: var(--color-accent-bg);
       color: #ffffff;
       transition: background-color 0.2s ease;
@@ -190,7 +191,7 @@
       }
 
       &.is-complete {
-        background-color: var(--color-accent); 
+        background-color: var(--color-accent);
       }
     }
   }
@@ -230,7 +231,9 @@
     @extend %font-p;
     color: var(--color-text);
     margin-bottom: 24px;
-    transition: border-color 0.2s ease, background-color 0.2s ease;
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease;
 
     &:placeholder {
       color: var(--color-exercises-note);
@@ -244,4 +247,3 @@
     }
   }
 }
-

@@ -2,19 +2,19 @@
 @use '../../base/mixins' as *;
 
 .gear-wish-list {
-    &__empty {
-        grid-column: 2 / -1;
-        @include flex(center, center);
-        @include font(16px, 1.4, 500);
-        color: var(--color-label);
-        padding: 24px;
-        border-radius: 20px;
-        background-color: var(--color-input__bg);
-        border: 1px dashed var(--color-border__theme);
-        text-align: center;
+  &__empty {
+    grid-column: 2 / -1;
+    @include flex(center, center);
+    @include font(16px, 1.4, 500);
+    color: var(--color-label);
+    padding: 24px;
+    border-radius: 20px;
+    background-color: var(--color-input__bg);
+    border: 1px dashed var(--color-border__theme);
+    text-align: center;
 
-        @media (max-width: 560px) {
-            grid-column: 1 / -1;
-        }
+    @media (max-width: 560px) {
+      grid-column: 1 / -1;
     }
+  }
 }

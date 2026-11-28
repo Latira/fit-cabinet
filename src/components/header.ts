@@ -18,7 +18,7 @@ export function createHeader(): HTMLElement {
   logoBack.append(logoImg, logoTitle);
   logoLink.append(logoBack);
 
-  const burgerMenu = el('div', 'burger-menu'); 
+  const burgerMenu = el('div', 'burger-menu');
   const nav = el('nav', 'burger-menu__nav');
   const menuList = el('ul', 'burger-menu__list');
 
@@ -30,7 +30,7 @@ export function createHeader(): HTMLElement {
     { name: 'Notes', path: '/notes' },
     { name: 'Gearwishlist', path: '/wishlist' },
     { name: 'Settings', path: '/settings' },
-    { name: 'Log Out', path: '/logout' }
+    { name: 'Log Out', path: '/logout' },
   ];
 
   const pageContainer = document.querySelector('.app-content') as HTMLElement;
@@ -42,7 +42,7 @@ export function createHeader(): HTMLElement {
     document.body.classList.remove('scroll-lock');
   };
 
-  menuItems.forEach(item => {
+  menuItems.forEach((item) => {
     const listItem = el('li', 'burger-menu__item');
     const link = el('a', 'burger-menu__link', item.name);
     link.setAttribute('href', item.path);
@@ -55,14 +55,14 @@ export function createHeader(): HTMLElement {
       event.preventDefault();
       event.stopPropagation();
 
-      menuList.querySelectorAll('.burger-menu__item').forEach(el => {
+      menuList.querySelectorAll('.burger-menu__item').forEach((el) => {
         el.classList.remove('is-active');
       });
       listItem.classList.add('is-active');
 
       closeMenu();
-            
-      const container = pageContainer || document.querySelector('.app-content') as HTMLElement;
+
+      const container = pageContainer || (document.querySelector('.app-content') as HTMLElement);
       if (container) {
         navigateTo(item.path, container);
       }
@@ -74,7 +74,6 @@ export function createHeader(): HTMLElement {
 
   nav.append(menuList);
   burgerMenu.append(nav);
-
 
   menu.addEventListener('click', (event) => {
     const target = event.target as HTMLElement;
@@ -98,12 +97,12 @@ export function createHeader(): HTMLElement {
     if (!target.closest('.menu') && burgerMenu.classList.contains('is-open')) {
       closeMenu();
     }
-  })
+  });
 
   logoLink.addEventListener('click', (event) => {
     event.preventDefault();
 
-    menuList.querySelectorAll('.burger-menu__item').forEach(el => {
+    menuList.querySelectorAll('.burger-menu__item').forEach((el) => {
       el.classList.remove('is-active');
     });
     closeMenu();
@@ -112,7 +111,7 @@ export function createHeader(): HTMLElement {
     if (pageContainer) {
       navigateTo('/', pageContainer);
     }
-  })
+  });
 
   menu.append(menuText, menuBurger, burgerMenu);
   headerWrapper.append(logoLink, menu);

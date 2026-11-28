@@ -1,5 +1,5 @@
 import { createSettings } from '../pages/settings';
-import { createDashboard } from '../pages/dashboard'
+import { createDashboard } from '../pages/dashboard';
 import { createExercisesPage } from '../pages/exercises';
 import { createAbout } from '../pages/about-us';
 import { createWorkouts } from '../pages/workouts';
@@ -59,7 +59,7 @@ export function initRouter(container: HTMLElement): void {
   document.body.addEventListener('click', (e) => {
     const target = e.target as HTMLElement;
     const link = target.closest('a');
-    
+
     if (link && link.getAttribute('href')?.startsWith('/')) {
       e.preventDefault();
       navigateTo(link.getAttribute('href')!, container);

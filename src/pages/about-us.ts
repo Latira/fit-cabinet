@@ -10,7 +10,11 @@ export function createAbout(): HTMLElement {
   const cardDaryaLink = el('a', 'about__github-link', 'DARYADUDKOVA98');
   cardDaryaLink.setAttribute('href', 'https://github.com/DaryaDudkova98');
   cardDaryaLink.setAttribute('target', '_blank');
-  const cardDaryaBio = el('p', 'about__bio', 'Отвечала за реализацию модального окна авторизации (Firebase: Google, Github) и email/пароль, за страницу настроек, тренировок и упражнений (с API фильтрацией по группам мышц и кэшированием в локальное хранилище), а также вишлиста.');
+  const cardDaryaBio = el(
+    'p',
+    'about__bio',
+    'Отвечала за реализацию модального окна авторизации (Firebase: Google, Github) и email/пароль, за страницу настроек, тренировок и упражнений (с API фильтрацией по группам мышц и кэшированием в локальное хранилище), а также вишлиста.'
+  );
   aboutCardDarya.append(cardDaryaName, cardDaryaLink, cardDaryaBio);
 
   const divider = el('div', 'about__divider');
@@ -20,19 +24,31 @@ export function createAbout(): HTMLElement {
   const cardTanyaLink = el('a', 'about__github-link', 'LATIRA');
   cardTanyaLink.setAttribute('href', 'https://github.com/Latira');
   cardTanyaLink.setAttribute('target', '_blank');
-  const cardTanyaBio = el('p', 'about__bio', 'Здесь будет информация обо мне, моих задачах в проекте и технологиях.');
+  const cardTanyaBio = el(
+    'p',
+    'about__bio',
+    'Здесь будет информация обо мне, моих задачах в проекте и технологиях.'
+  );
   aboutCardTanya.append(cardTanyaName, cardTanyaLink, cardTanyaBio);
 
   aboutTeam.append(aboutCardDarya, divider, aboutCardTanya);
 
   const aboutProject = el('div', 'about__project');
-  const aboutProjectIntro = el('p', 'about__project__intro', 'FitCabinet - это единый центр привычек для спортсменов-любителей.');
+  const aboutProjectIntro = el(
+    'p',
+    'about__project__intro',
+    'FitCabinet - это единый центр привычек для спортсменов-любителей.'
+  );
   const projectProblem = `Проблема: Спортсмен-любитель вынужден держать 5-7 приложений: в одном он считает шаги, в другом — калории, в третьем ведет дневник тренировок, в четвертом ставит будильник для медитации. В итоге он бросает всё, потому что это отнимает слишком много времени.`;
   const projectSolution = `Решение: Наше приложение собирает все ключевые привычки для спорта в одном месте. Но вместо сложных графиков и профессиональных таблиц, оно предлагает простую форму наблюдения. Пользователь не «управляет данными», а просто наблюдает за собой: отмечает, выпил ли воду, выспался ли, сделал ли зарядку.`;
-  const aboutProjectText = el('p', 'about__project__text', `${projectProblem}\n\n${projectSolution}`);
-  
+  const aboutProjectText = el(
+    'p',
+    'about__project__text',
+    `${projectProblem}\n\n${projectSolution}`
+  );
+
   aboutProject.append(aboutProjectIntro, aboutProjectText);
 
-  about.append(title, aboutTeam, aboutProject); 
+  about.append(title, aboutTeam, aboutProject);
   return about;
 }
