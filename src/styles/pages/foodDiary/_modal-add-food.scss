@@ -7,7 +7,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: var(--color-white-bg);
   @include flex(center, center);
   z-index: 1000;
 
@@ -49,6 +49,11 @@
       }
     }
 
+    .modal-bju-inputs {
+      @extend %flex-column;
+      gap: 10px;
+    }
+
     .modal-actions {
       @include flex(space-between, center);
       gap: 15px;
@@ -58,6 +63,7 @@
         flex: 1;
         height: 40px;
         border-radius: 20px;
+        padding: 0 30px;
 
         &--cancel {
           background-color: var(--color-grey-bg);
@@ -66,36 +72,13 @@
 
         &--submit {
           background-color: var(--color-accent);
-          color: #ffffff;
+          color: var(--color-white);
+        }
+
+        &:hover {
+            opacity: 0.9;
         }
       }
     }
-  }
-}
-
-.modal-form {
-  .modal-search-row {
-    display: flex;
-    gap: 10px;
-    width: 100%;
-
-    .modal-input--search {
-      flex: 1;
-    }
-
-    .modal-btn-search {
-      @include base-btn;
-      height: 44px;
-      padding: 0 15px;
-      border-radius: 8px;
-      background-color: var(--color-line);
-      color: var(--color-black);
-      font-size: 12px;
-    }
-  }
-
-  .modal-select--results {
-    border-color: var(--color-accent);
-    background-color: var(--color-white-bg-hover);
   }
 }
