@@ -10,7 +10,7 @@ export function createAbout(): HTMLElement {
   const cardDaryaLink = el('a', 'about__github-link', 'DARYADUDKOVA98');
   cardDaryaLink.setAttribute('href', 'https://github.com/DaryaDudkova98');
   cardDaryaLink.setAttribute('target', '_blank');
-  const cardDaryaBio = el('p', 'about__bio', 'Отвечала за реализацию модального окна авторизации (Firebase: Google, Github) и email/пароль, за страницу настроек, тренировок и упражнений (с API фильтрацией по группам мышц и кэшированием в локальное хранилище), а также вишлиста.');
+  const cardDaryaBio = el('p', 'about__bio', 'Реализация модального окна авторизации (Firebase: Google, Github) и email/пароль, за страницу настроек, тренировок и упражнений (с API фильтрацией по группам мышц и кэшированием в локальное хранилище), а также вишлиста.');
   aboutCardDarya.append(cardDaryaName, cardDaryaLink, cardDaryaBio);
 
   const divider = el('div', 'about__divider');
@@ -20,7 +20,7 @@ export function createAbout(): HTMLElement {
   const cardTanyaLink = el('a', 'about__github-link', 'LATIRA');
   cardTanyaLink.setAttribute('href', 'https://github.com/Latira');
   cardTanyaLink.setAttribute('target', '_blank');
-  const cardTanyaBio = el('p', 'about__bio', 'Здесь будет информация обо мне, моих задачах в проекте и технологиях.');
+  const cardTanyaBio = el('p', 'about__bio', 'Реализация страниц Dashboard, About Us и Food Diary, компонентов header и footer, настройка логики калькулятора калорий и хранения данных о питании в LocalStorage по датам (HTML5, CSS3, TypeScript, Vite, Vitest)');
   aboutCardTanya.append(cardTanyaName, cardTanyaLink, cardTanyaBio);
 
   aboutTeam.append(aboutCardDarya, divider, aboutCardTanya);
