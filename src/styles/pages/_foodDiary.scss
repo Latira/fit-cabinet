@@ -1,5 +1,7 @@
 @use '../base/variables' as *;
 @use '../base/mixins' as *;
+@use './foodDiary/modal-add-food';
+@use '../components/calendar';
 
 .food-diary {
   @extend %flex-column;
@@ -15,7 +17,7 @@
   }
 
   &__controls {
-    @include flex(space-between, flex-end); // Выравнивание по нижней линии
+    @include flex(space-between, flex-end);
     width: 100%;
     margin-bottom: 40px;
     gap: 30px;

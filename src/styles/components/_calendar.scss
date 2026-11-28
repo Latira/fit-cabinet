@@ -1,0 +1,74 @@
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+.food-diary__calendar.calendar {
+    @extend %flex-column;
+    background: var(--color-white);
+    border: 1px solid var(--color-black);
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-family: inherit;
+    min-width: 320px;
+}
+
+.calendar__header {
+    @extend %flex-row;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.calendar__title {
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+}
+
+.calendar__arrow {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 5px;
+    transition: transform 0.1s ease;
+}
+.calendar__arrow:active {
+    transform: scale(0.85);
+}
+
+.calendar__grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    width: 100%;
+    border-top: 1px solid var(--color-line);
+    padding-top: 8px;
+}
+
+.calendar__day {
+    @extend %flex-column;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    transition: background 0.2s ease;
+}
+
+.calendar__day-name {
+    font-size: 10px;
+    color: var(--color-grey);
+    margin-bottom: 2px;
+}
+
+.calendar__day-number {
+    @extend %flex-row;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    width: 24px;
+    height: 24px;
+}
+
+.calendar__day--active .calendar__day-number {
+    background: var(--color-accent);
+    color: var(--color-white);
+    border-radius: 50%;
+}
